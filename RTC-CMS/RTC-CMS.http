@@ -1,0 +1,6 @@
+@RTC_CMS_HostAddress = http://localhost:5140
+
+GET {{RTC_CMS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

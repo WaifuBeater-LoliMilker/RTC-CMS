@@ -1,0 +1,47 @@
+﻿.bg-auth {
+    background: #6a11cb;
+    background: linear-gradient( to bottom right, rgb(43, 103, 206), rgba(37, 117, 252, 0.1) );
+}
+
+.btn-login {
+    padding: 0 20px;
+    width: 100%;
+    height: calc(2rem + 10px);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    transition: all ease 0.5s;
+    background-image: linear-gradient(to left, orange, lightblue, yellow, white);
+    background-size: 300%;
+    background-position: 0 0;
+    -webkit-appearance: none !important;
+}
+
+    .btn-login:hover {
+        background-position: 100% 0;
+        color: white
+    }
+
+.card {
+    border: 2px solid rgba(225,225,225,0.2) !important;
+    border-radius: 15px;
+    background: linear-gradient( to bottom right, rgb(255, 255, 255, 0.3), rgba(37, 117, 252, 1) );
+    backdrop-filter: blur(20px);
+    height: 28rem;
+}
+
+.card-header {
+    background: transparent !important;
+    border: none;
+}
+
+main {
+    top: 25%
+}
+
+h3 {
+    color: white;
+}
+img{
+    width: 75%;
+}
