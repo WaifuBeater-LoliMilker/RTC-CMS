@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,7 +15,8 @@
     <title>Login</title>
     <link href="~/css/styles.min.css" rel="stylesheet" />
     <link href="~/css/auth/login.css" rel="stylesheet" />
-    <script src="~/libs/fontawesome6.3.0/all.js"></script>
+    <link href="~/libs/fontawesome-free-6.7.2-web/css/all.min.css" rel="stylesheet" />
+    <script src="~/libs/fontawesome-free-6.7.2-web/js/solid.min.js"></script>
     <script src="~/libs/bootstrap-5.3.6/js/bootstrap.bundle.min.js"></script>
 </head>
 <body class="bg-auth">
@@ -20,21 +27,25 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg">
-                                <div class="card-header d-flex justify-content-center">
+                                <div class="card-header d-flex justify-content-center mt-1">
                                     @* <h3 class="text-center font-weight-light my-4">ĐĂNG NHẬP</h3> *@
                                     <img src="~/imgs/rtc-logo.png"/>
                                 </div>
-                                <div class="card-body px-lg-5 px-md-3 px-1">
-                                    <form method="post" action="/login" autocomplete="on">
+                                <div class="card-body px-lg-5 px-3 pt-0">
+                                    <div class="mb-1 text-center text-error"></div>
+                                    <form method="post" action="/login" autocomplete="on" id="form_login">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="username" type="text" name="username"
                                                 placeholder="Tên đăng nhập" autofocus autocomplete="username" required/>
                                             <label for="username">Tên đăng nhập</label>
                                         </div>
-                                        <div class="form-floating mb-3">
+                                        <div class="form-floating mb-3 position-relative">
                                             <input class="form-control" id="password" type="password" name="password"
                                             placeholder="Mật khẩu" autocomplete="current-password" required/>
                                             <label for="password">Mật khẩu</label>
+                                            <div class="position-absolute d-flex flex-column justify-content-center show-password">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </div>
                                         </div>
                                             <button type="submit" class="btn btn-login mt-3">Đăng nhập</button>
                                     </form>
@@ -46,5 +57,6 @@
             </main>
         </div>
     </div>
+    <script src="~/js/auth/login.js" asp-append-version="true"></script>
 </body>
 </html>

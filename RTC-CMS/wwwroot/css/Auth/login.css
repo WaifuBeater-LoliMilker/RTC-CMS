@@ -17,7 +17,8 @@
     -webkit-appearance: none !important;
 }
 
-    .btn-login:hover {
+    .btn-login:hover,
+    .btn-login:focus {
         background-position: 100% 0;
         color: white
     }
@@ -27,7 +28,9 @@
     border-radius: 15px;
     background: linear-gradient( to bottom right, rgb(255, 255, 255, 0.3), rgba(37, 117, 252, 1) );
     backdrop-filter: blur(20px);
-    height: 28rem;
+    min-height: 50vh;
+    max-height: 70vh;
+    height: calc(30vh + 10vw);
 }
 
 .card-header {
@@ -42,6 +45,25 @@ main {
 h3 {
     color: white;
 }
-img{
+
+img {
     width: 75%;
+}
+
+.text-error {
+    font-size: 20px;
+    color: red;
+    min-height: 1.5em;
+}
+.show-password {
+    top: calc(1.75em + 1px);
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 999;
+    color: black;
+    height: 2.25em;
+    width: 2.25em;
+    border:none;
+    background: transparent;
 }
