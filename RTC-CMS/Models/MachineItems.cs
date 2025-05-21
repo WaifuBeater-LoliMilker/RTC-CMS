@@ -18,8 +18,7 @@ public partial class MachineItems
     public decimal? OperateThreshold { get; set; }
 
     /// <summary>
-    /// 1: Động cơ
-    /// 2: .....
+    /// 1: Động cơ\n2: Biến tần
     /// </summary>
     public int? MachineItemType { get; set; }
 }

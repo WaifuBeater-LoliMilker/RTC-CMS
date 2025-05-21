@@ -12,4 +12,6 @@ public partial class Areas
     public string AreaCode { get; set; }
 
     public string AreaName { get; set; }
+
+    public int? ParentId { get; set; }
 }

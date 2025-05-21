@@ -4,5 +4,23 @@
     "inputFiles": [
       "wwwroot/css/styles.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/lodash/lodash.min.js",
+    "inputFiles": [
+      "wwwroot/libs/lodash/lodash.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/comboTree/comboTreePlugin.min.js",
+    "inputFiles": [
+      "wwwroot/libs/comboTree/comboTreePlugin.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/comboTree/comboTreeStyle.min.css",
+    "inputFiles": [
+      "wwwroot/libs/comboTree/comboTreeStyle.css"
+    ]
   }
 ]

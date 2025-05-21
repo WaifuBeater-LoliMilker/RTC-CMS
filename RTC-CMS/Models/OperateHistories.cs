@@ -9,18 +9,14 @@ public partial class OperateHistories
 {
     public int Id { get; set; }
 
-    public int? MachineItemId { get; set; }
+    public int? MachineItemLinkId { get; set; }
 
     /// <summary>
     /// 1: Chạy,2: Dừng,3: Lỗi
     /// </summary>
     public int? Status { get; set; }
 
-    public decimal? SpeedValue { get; set; }
-
-    public decimal? VibrationValue { get; set; }
-
-    public decimal? TemperatureValue { get; set; }
+    public decimal? RecordedValue { get; set; }
 
     public DateTime? RecordedAt { get; set; }
 }

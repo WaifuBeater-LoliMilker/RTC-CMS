@@ -27,11 +27,23 @@
          "ObjectType": 0
       },
       {
+         "Name": "machine_item_link",
+         "ObjectType": 0
+      },
+      {
+         "Name": "machine_item_variant",
+         "ObjectType": 0
+      },
+      {
          "Name": "machine_items",
          "ObjectType": 0
       },
       {
          "Name": "machines",
+         "ObjectType": 0
+      },
+      {
+         "Name": "maintenance_histories",
          "ObjectType": 0
       },
       {
@@ -60,7 +72,6 @@
    "UseHandleBars": false,
    "UseHierarchyId": false,
    "UseInflector": false,
-   "UseInternalAccessModifiersForSprocsAndFunctions": false,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,
    "UseNoDefaultConstructor": false,

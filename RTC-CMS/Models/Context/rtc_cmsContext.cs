@@ -20,9 +20,15 @@ public partial class rtc_cmsContext : DbContext
 
     public virtual DbSet<MachineErrors> MachineErrors { get; set; }
 
+    public virtual DbSet<MachineItemLink> MachineItemLink { get; set; }
+
+    public virtual DbSet<MachineItemVariant> MachineItemVariant { get; set; }
+
     public virtual DbSet<MachineItems> MachineItems { get; set; }
 
     public virtual DbSet<Machines> Machines { get; set; }
+
+    public virtual DbSet<MaintenanceHistories> MaintenanceHistories { get; set; }
 
     public virtual DbSet<OperateHistories> OperateHistories { get; set; }
 
@@ -45,6 +51,7 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AreaCode).HasMaxLength(45);
             entity.Property(e => e.AreaName).HasMaxLength(45);
+            entity.Property(e => e.ParentId).HasColumnName("ParentID");
         });
 
         modelBuilder.Entity<ErrorHistories>(entity =>
@@ -70,6 +77,30 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.MachineErrorName).HasMaxLength(145);
         });
 
+        modelBuilder.Entity<MachineItemLink>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("machine_item_link");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.MachineItemId).HasColumnName("MachineItemID");
+            entity.Property(e => e.MachineItemVariantId).HasColumnName("MachineItemVariantID");
+            entity.Property(e => e.MaxSpec).HasPrecision(18, 2);
+            entity.Property(e => e.MinSpec).HasPrecision(18, 2);
+        });
+
+        modelBuilder.Entity<MachineItemVariant>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("machine_item_variant");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.VariantName).HasMaxLength(145);
+            entity.Property(e => e.VariantType).HasComment("1: Nhiệt độ, 2: Độ rung, 3: Dòng điện, 4: Điện áp, 5: Tần số");
+        });
+
         modelBuilder.Entity<MachineItems>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -80,7 +111,7 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.MachineId).HasColumnName("MachineID");
             entity.Property(e => e.MachineItemCode).HasMaxLength(45);
             entity.Property(e => e.MachineItemName).HasMaxLength(145);
-            entity.Property(e => e.MachineItemType).HasComment("1: Động cơ\n2: .....");
+            entity.Property(e => e.MachineItemType).HasComment("1: Động cơ\\n2: Biến tần");
             entity.Property(e => e.OperateThreshold).HasPrecision(18, 2);
         });
 
@@ -97,6 +128,24 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.OperateThreshold).HasPrecision(18, 2);
         });
 
+        modelBuilder.Entity<MaintenanceHistories>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("maintenance_histories");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ApprovedId).HasColumnName("ApprovedID");
+            entity.Property(e => e.AsignId).HasColumnName("AsignID");
+            entity.Property(e => e.Content).HasColumnType("text");
+            entity.Property(e => e.CreatedId).HasColumnName("CreatedID");
+            entity.Property(e => e.DateEndActual).HasColumnType("datetime");
+            entity.Property(e => e.DateEndPlan).HasColumnType("datetime");
+            entity.Property(e => e.DateStartActual).HasColumnType("datetime");
+            entity.Property(e => e.DateStartPlan).HasColumnType("datetime");
+            entity.Property(e => e.MachineItemId).HasColumnName("MachineItemID");
+        });
+
         modelBuilder.Entity<OperateHistories>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -104,12 +153,10 @@ public partial class rtc_cmsContext : DbContext
             entity.ToTable("operate_histories");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.MachineItemId).HasColumnName("MachineItemID");
+            entity.Property(e => e.MachineItemLinkId).HasColumnName("MachineItemLinkID");
             entity.Property(e => e.RecordedAt).HasColumnType("datetime");
-            entity.Property(e => e.SpeedValue).HasPrecision(18, 2);
+            entity.Property(e => e.RecordedValue).HasPrecision(18, 2);
             entity.Property(e => e.Status).HasComment("1: Chạy,2: Dừng,3: Lỗi");
-            entity.Property(e => e.TemperatureValue).HasPrecision(18, 2);
-            entity.Property(e => e.VibrationValue).HasPrecision(18, 2);
         });
 
         modelBuilder.Entity<Roles>(entity =>
