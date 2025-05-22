@@ -18,6 +18,8 @@ public partial class rtc_cmsContext : DbContext
 
     public virtual DbSet<ErrorHistories> ErrorHistories { get; set; }
 
+    public virtual DbSet<MachineAdressPlc> MachineAdressPlc { get; set; }
+
     public virtual DbSet<MachineErrors> MachineErrors { get; set; }
 
     public virtual DbSet<MachineItemLink> MachineItemLink { get; set; }
@@ -64,6 +66,21 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.ErrorDate).HasColumnType("datetime");
             entity.Property(e => e.MachineErrorId).HasColumnName("MachineErrorID");
             entity.Property(e => e.MachineId).HasColumnName("MachineID");
+        });
+
+        modelBuilder.Entity<MachineAdressPlc>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("machine_adress_plc");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("ID");
+            entity.Property(e => e.AdressPlc)
+                .HasMaxLength(45)
+                .HasColumnName("Adress_PLC");
+            entity.Property(e => e.MachineItemId).HasColumnName("Machine_Item_ID");
         });
 
         modelBuilder.Entity<MachineErrors>(entity =>
@@ -123,9 +140,15 @@ public partial class rtc_cmsContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AreaId).HasColumnName("AreaID");
+            entity.Property(e => e.IpPlc)
+                .HasMaxLength(45)
+                .HasColumnName("IP_PLC");
             entity.Property(e => e.MachineCode).HasMaxLength(45);
             entity.Property(e => e.MachineName).HasMaxLength(145);
             entity.Property(e => e.OperateThreshold).HasPrecision(18, 2);
+            entity.Property(e => e.PortPlc)
+                .HasMaxLength(45)
+                .HasColumnName("Port_PLC");
         });
 
         modelBuilder.Entity<MaintenanceHistories>(entity =>
@@ -144,7 +167,6 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.DateStartActual).HasColumnType("datetime");
             entity.Property(e => e.DateStartPlan).HasColumnType("datetime");
             entity.Property(e => e.MachineItemId).HasColumnName("MachineItemID");
-            entity.Property(e => e.Status).HasComment("1: chưa tiến hành, 2: đang tiến hành, 3: đã hoàn thành, 4: đã hủy bỏ");
         });
 
         modelBuilder.Entity<OperateHistories>(entity =>
