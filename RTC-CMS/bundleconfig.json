@@ -22,5 +22,17 @@
     "inputFiles": [
       "wwwroot/libs/comboTree/comboTreeStyle.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/daterangepicker/daterangepicker.min.css",
+    "inputFiles": [
+      "wwwroot/libs/daterangepicker/daterangepicker.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/libs/daterangepicker/daterangepicker.min.js",
+    "inputFiles": [
+      "wwwroot/libs/daterangepicker/daterangepicker.js"
+    ]
   }
 ]

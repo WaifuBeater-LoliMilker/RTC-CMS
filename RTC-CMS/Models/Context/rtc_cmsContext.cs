@@ -144,6 +144,7 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.DateStartActual).HasColumnType("datetime");
             entity.Property(e => e.DateStartPlan).HasColumnType("datetime");
             entity.Property(e => e.MachineItemId).HasColumnName("MachineItemID");
+            entity.Property(e => e.Status).HasComment("1: chưa tiến hành, 2: đang tiến hành, 3: đã hoàn thành, 4: đã hủy bỏ");
         });
 
         modelBuilder.Entity<OperateHistories>(entity =>
