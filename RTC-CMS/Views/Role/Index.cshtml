@@ -1,0 +1,56 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container px-4">
+    <h1 class="mt-4 mb-4">Quản lý vai trò</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <button class="btn btn-primary" id="role_add" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="card-body">
+            <div id="role_table"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px;">
+        <div class="modal-content" style="padding: 16px;">
+            <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
+                <h1 class="modal-title fs-5" id="roleModalLabel">Chi tiết vai trò</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="role_rolecode" placeholder="Mã vai trò" value="">
+                        <label for="role_rolecode">Mã vai trò</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="role_rolename" placeholder="Tên vai trò" value="">
+                        <label for="role_rolename">Tên vai trò</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding-top: 1rem;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button id="btn_savechange" type="button" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/Roles/roles.js"></script>
