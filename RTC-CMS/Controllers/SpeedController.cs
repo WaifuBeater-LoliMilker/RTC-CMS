@@ -1,15 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RTC_CMS.Models;
 
 namespace RTC_CMS.Controllers
 {
     [Route("speed")]
     public class SpeedController : Controller
     {
+        IGenericRepo _repo;
+        public SpeedController(IGenericRepo repo)
+        {
+            _repo = repo;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpGet("speed-chart")]
         public IActionResult SpeedChart()
         {
@@ -64,6 +72,22 @@ namespace RTC_CMS.Controllers
 
             return Ok(conveyorData);
         }
+
+        //[HttpGet("get-machine-by-area/{areaID}")]
+        //public async Task<IActionResult> GetMachineByArea(int areaID)
+        //{
+
+
+        //    List<Machines> lstMachine = await _repo.FindByExpression<Machines>(x => x.AreaId == areaID);
+
+        //    if (lstMachine == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+
+        //}
+
 
     }
 }

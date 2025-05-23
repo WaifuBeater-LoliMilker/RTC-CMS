@@ -18,8 +18,8 @@
                 formatter: function (cell, formatterParams, onRendered) {
                     const id = cell.getRow().getData().Id;
                     return `
-                <button class="btn btn-success btn-edit" data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-success btn-edit" data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
                 `;
                 },
                 width: 150,

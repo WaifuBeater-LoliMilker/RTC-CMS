@@ -43,6 +43,7 @@ namespace RTC_CMS.Controllers
                 return BadRequest("Đã có lỗi xảy ra, vui lòng thử lại");
             }
         }
+
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
@@ -50,6 +51,7 @@ namespace RTC_CMS.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
+
         [HttpGet("unauthorized")]
         [AllowAnonymous]
         public IActionResult UnauthorizedView()
