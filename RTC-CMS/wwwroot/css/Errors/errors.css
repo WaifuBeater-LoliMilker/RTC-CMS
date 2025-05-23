@@ -1,0 +1,12 @@
+﻿.code-cell, .name-cell {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.code-cell.new{
+    border: 1px solid blue;
+}
+.name-cell.new{
+    border: 1px solid blue;
+}
