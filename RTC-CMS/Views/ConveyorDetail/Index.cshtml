@@ -1,0 +1,259 @@
+﻿@{
+    ViewData["Title"] = "Conveyor_Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/conveyor_detail.css" rel="stylesheet" />
+
+<div class="card" id="card_container">
+    <div class="card-body pb-0">
+        <div>
+            <h5 class="p-0 m-0 w-100 text-center fw-bold ">BĂNG TẢI 1</h5>
+
+            <div class="row gy-0 mt-1">
+
+                <div class="col-6 ps-0 pe-0 mb-1">
+                    <div class="row m-0 p-0">
+
+                        <div class="col-12 p-0">
+                            <div class="card m-0 p-0 h-100">
+                                <div class="card-body p-0">
+                                    <div class="card-body p-0">
+
+                                        <div id="time_line_chart" style="width: 100%; height: 88px;" class="p-0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!--====================================== ĐỘNG CƠ ======================================-->
+
+                        <div class="col-12 p-0">
+                            <div class="card m-0 p-1 h-100">
+                                <div class="card-body p-0">
+                                    <div class="row m-0 p-0">
+
+                                        <div class="col-4 p-0">
+                                            <div class="card-body p-0">
+                                                <div class="card-body p-0">
+
+                                                    <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 75px;" class="p-0 line_chart_engine_vibration">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4 p-0">
+                                            <div class="card-body p-0">
+                                                <div class="card-body p-0">
+
+                                                    <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 75px;" class="p-0 line_chart_engine_vibration">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-4 p-0">
+                                            <div class="card-body p-0">
+                                                <div class="card-body p-0">
+
+                                                    <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 75px;" class="p-0 line_chart_engine_vibration">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        <div class="col-4 p-0">
+                                            <div class="card-body p-0">
+                                                <div class="card-body p-0">
+
+                                                    <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 75px;" class="p-0 line_chart_engine_temperature">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4 p-0">
+                                            <div class="card-body p-0">
+                                                <div class="card-body p-0">
+
+                                                    <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 75px;" class="p-0 line_chart_engine_temperature">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4 p-0">
+                                            <div class="card-body p-0">
+                                                <div class="card-body p-0">
+
+                                                    <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 75px;" class="p-0 line_chart_engine_temperature">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <!--====================================== BIẾN TẦN ======================================-->
+                <div class="col-6 ps-0 pe-0 mb-1">
+                    <div class="row m-0 p-0">
+                        <div class="col-12 p-0">
+                            <div class="card m-0 p-1 h-100">
+                                <div class="card-body p-0">
+                                    <div class="card-body p-0">
+                                        <div class="row m-0 p-0">
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_electric_current">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_electric_current">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_electric_current">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_voltage">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_voltage">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_voltage">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_frequency">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_frequency">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4 p-0">
+                                                <div class="card-body p-0">
+                                                    <div class="card-body p-0">
+
+                                                        <div @* id="line_chart_engine" *@ style="width: 100%; min-height: 80px;" class="p-0 line_chart_inverter_frequency">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/js/conveyor_detail.js"></script>
