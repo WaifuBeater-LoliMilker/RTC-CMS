@@ -4,30 +4,80 @@ $(async function () {
 
     const areas = await GetAllArea();
     machines = await GetAllMachine();
+
+    const machineItems = await GetAllMachineItem();
+
+    // Tạo dữ liệu lồng nhau
+
+
+    //define table
     table = new Tabulator("#machine_table", {
-        data: machines,
+        height: "311px",
         layout: "fitColumns",
+        columnDefaults: {
+            resizable: true,
+        },
+        data: machines,
         columns: [
-            { title: "ID", field: "Id", visible: false },
-            { title: "MachineCode", field: "MachineCode" },
-            { title: "MachineName", field: "MachineName" },
-            { title: "AreaId", field: "AreaId" },
-            { title: "Operate Threshold", field: "OperateThreshold" },
-            {
-                title: "Actions",
-                formatter: function (cell, formatterParams, onRendered) {
-                    const id = cell.getRow().getData().Id;
-                    return `
-                <button class="btn btn-success btn-edit"  data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
-                `;
-                },
-                width: 150,
-                hozAlign: "left",
-                cellClick: CellClick
-            }
-        ]
+            { title: "Make", field: "make" },
+            { title: "Model", field: "model" },
+            { title: "Registration", field: "reg" },
+            { title: "Color", field: "color" },
+        ],
+        rowFormatter: function (row) {
+            //create and style holder elements
+            var holderEl = document.createElement("div");
+            var tableEl = document.createElement("div");
+
+            holderEl.style.boxSizing = "border-box";
+            holderEl.style.padding = "10px 30px 10px 10px";
+            holderEl.style.borderTop = "1px solid #333";
+            holderEl.style.borderBotom = "1px solid #333";
+
+
+            tableEl.style.border = "1px solid #333";
+
+            holderEl.appendChild(tableEl);
+
+            row.getElement().appendChild(holderEl);
+
+            var subTable = new Tabulator(tableEl, {
+                layout: "fitColumns",
+                data: machineItems.find(p=>p.MachineId = row.getData().Id),
+                columns: [
+                    { title: "Date", field: "date", sorter: "date" },
+                    { title: "Engineer", field: "engineer" },
+                    { title: "Action", field: "actions" },
+                ]
+            })
+        },
     });
+
+
+    //table = new Tabulator("#machine_table", {
+    //    data: machines,
+    //    layout: "fitColumns",
+    //    columns: [
+    //        { title: "ID", field: "Id", visible: false },
+    //        { title: "MachineCode", field: "MachineCode" },
+    //        { title: "MachineName", field: "MachineName" },
+    //        { title: "AreaId", field: "AreaId" },
+    //        { title: "Operate Threshold", field: "OperateThreshold" },
+    //        {
+    //            title: "Actions",
+    //            formatter: function (cell, formatterParams, onRendered) {
+    //                const id = cell.getRow().getData().Id;
+    //                return `
+    //            <button class="btn btn-success btn-edit"  data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
+    //            <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
+    //            `;
+    //            },
+    //            width: 150,
+    //            hozAlign: "left",
+    //            cellClick: CellClick
+    //        }
+    //    ]
+    //});
 
     $('#machine_area').select2({
         placeholder: "Chọn khu vực",
@@ -190,5 +240,21 @@ function UpdateMachine() {
             alert('Có lỗi xảy ra: ' + error);
         }
     });
-    
+
+}
+
+function GetAllMachineItem() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: "/machines/get-all-machine-items",
+            type: "GET",
+            dataType: "json", // nếu server trả về JSON
+            success: function (response) {
+                resolve(response);
+            },
+            error: function (xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
 }

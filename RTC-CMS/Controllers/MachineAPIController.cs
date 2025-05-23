@@ -18,7 +18,7 @@ namespace RTC_CMS.Controllers
         [HttpGet("GetAllMachines")]
         public async Task<IActionResult> GetAllMachines()
         {
-            var machines = await _genericRepo.GetAll<Machines>();
+            var machines = await _genericRepo.GetAll<MachineAdressPlc>();
             return Ok(machines);
         }
            
