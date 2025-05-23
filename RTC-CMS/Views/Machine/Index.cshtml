@@ -1,0 +1,68 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Machines";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container px-4">
+    <h1 class="mt-4 mb-4">Băng tải</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <button class="btn btn-primary" id="machine_add" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="card-body">
+            <div id="machine_table"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px;">
+        <div class="modal-content" style="padding: 16px;">
+            <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Chi tiết băng tải</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="machine_machinecode" placeholder="Mã băng tải" value="">
+                        <label for="machine_machinecode">Mã băng tải</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="machine_machinename" placeholder="Tên băng tải" value="">
+                        <label for="machine_machinename">Tên băng tải</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <select class="form-select" aria-label="Default select example" name="state" id="machine_area">
+                            <option value="" selected disabled>Chọn khu vực</option>
+                        </select>
+                        <label for="machine_area">Khu vực</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="machine_operatorthreshold" placeholder="Operator Threshold" value="">
+                        <label for="machine_operatorthreshold">Operator Threshold</label>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding-top: 1rem;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button id ="btn_savechange" type="button" class="btn btn-primary" data-mode="insert">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/machines/machines.js"></script>

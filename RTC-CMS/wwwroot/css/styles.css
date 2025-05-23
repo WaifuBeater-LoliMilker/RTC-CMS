@@ -10965,6 +10965,11 @@ body {
   width: 225px;
   margin: 0;
 }
+@media (max-width: 420px){
+    .sb-topnav .navbar-brand {
+        width: 100px;
+    }
+}
 .sb-topnav.navbar-dark #sidebarToggle {
   color: rgba(255, 255, 255, 0.5);
 }

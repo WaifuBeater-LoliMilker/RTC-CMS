@@ -1,0 +1,67 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container px-4">
+    <h1 class="mt-4 mb-4">Quản lý tài khoản</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <button class="btn btn-primary" id="user_add" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="card-body">
+            <div id="users_table"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px;">
+        <div class="modal-content" style="padding: 16px;">
+            <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
+                <h1 class="modal-title fs-5" id="userModalLabel">Chi tiết người dùng</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="user_username" placeholder="Tên tài khoản" value="">
+                        <label for="user_username">Tên tài khoản</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="user_password" placeholder="Mật khẩu" value="">
+                        <label for="user_password">Mật khẩu</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <input type="text" class="form-control" id="user_fullname" placeholder="Họ và tên" value="">
+                        <label for="user_fullname">Họ và tên</label>
+                    </div>
+
+                    <div class="form-floating mb-3" style="margin-bottom: 1rem;">
+                        <select class="form-select" aria-label="Vai trò" name="state" id="user_role">
+                            <option value="" disabled selected>Chọn vai trò</option>
+                            <!-- Các tùy chọn vai trò sẽ được thêm ở đây -->
+                        </select>
+                        <label for="user_role">Vai trò</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding-top: 1rem;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button id="btn_savechange" type="button" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/Users/users.js"></script>

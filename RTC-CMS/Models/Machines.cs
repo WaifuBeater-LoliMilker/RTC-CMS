@@ -16,4 +16,10 @@ public partial class Machines
     public int? AreaId { get; set; }
 
     public decimal? OperateThreshold { get; set; }
+
+    public string IpPlc { get; set; }
+
+    public string PortPlc { get; set; }
+
+    public int? StationNumber { get; set; }
 }

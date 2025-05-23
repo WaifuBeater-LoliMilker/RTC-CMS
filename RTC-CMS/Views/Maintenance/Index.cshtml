@@ -1,0 +1,102 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Maintenance";
+    ViewData["NavHeader"] = "Maintenance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/libs/moment/moment.min.js"></script>
+<script src="~/libs/daterangepicker/daterangepicker.min.js"></script>
+<link href="~/libs/daterangepicker/daterangepicker.min.css" rel="stylesheet" />
+<link href="~/css/maintenance/maintenance.css" rel="stylesheet" />
+
+<div class="px-1 px-md-2 px-lg-4 py-3">
+    <div class="row g-3 px-1 px-md-3">
+        <div class="col-12 col-md-5">
+            <div class="d-flex align-items-center gap-2">
+                <label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm:</label>
+                <input type="text" class="form-control" id="search" autofocus />
+            </div>
+        </div>
+
+        <div class="col-12 col-md-5">
+            <div class="d-flex align-items-center gap-2">
+                <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái:</label>
+                <select class="form-control flex-grow-1" id="status_search">
+                    <option value="0">Tất cả</option>
+                    <option value="1">Chưa tiến hành</option>
+                    <option value="2">Đang tiến hành</option>
+                    <option value="3">Đã hoàn thành</option>
+                    <option value="4">Đã hủy bỏ</option>
+                </select>
+                <label class="flex-shrink-0 fw-bolder" for="machine_search">Tên máy:</label>
+                <select class="form-control flex-grow-1" id="machine_search">
+                    <option value="0">Tất cả</option>
+                    <option value="1">Máy A</option>
+                    <option value="2">Máy B</option>
+                    <option value="3">Máy C</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="col-12 col-md-2">
+            <button class="btn btn-primary w-100">
+                <i class="fa-solid fa-search"></i>
+                Tìm kiếm
+            </button>
+        </div>
+    </div>
+
+    <div class="container px-1 px-md-4">
+        <h1 class="mt-4 mb-4">Khu vực</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                <button class="btn btn-primary" id="task_add" data-bs-toggle="modal" data-bs-target="#modal_static"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="card-body">
+                <div id="task_table"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal_static" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Chi tiết khu vực</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="area_areacode" placeholder="Mã khu vực" value="">
+                        <label for="area_areacode">Mã khu vực</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="area_areaname" placeholder="Tên khu vực" value="">
+                        <label for="area_areaname">Tên khu vực</label>
+
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select" aria-label="Default select example" name="state" id="area_parent">
+                        </select>
+                        <label for="area_parent">Khu vực cha</label>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/maintenance/maintenace.js"></script>

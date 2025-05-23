@@ -23,6 +23,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "machine_adress_plc",
+         "ObjectType": 0
+      },
+      {
          "Name": "machine_errors",
          "ObjectType": 0
       },
@@ -72,6 +76,7 @@
    "UseHandleBars": false,
    "UseHierarchyId": false,
    "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,
    "UseNoDefaultConstructor": false,

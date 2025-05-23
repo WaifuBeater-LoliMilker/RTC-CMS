@@ -18,6 +18,12 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="efpt.config.json.user" />
+    <None Include="Views\Machine\Index.cshtml" />
+    <None Include="Views\Role\Index.cshtml" />
+    <None Include="Views\User\Index.cshtml" />
+    <None Include="wwwroot\js\Machines\machines.js" />
+    <None Include="wwwroot\js\Roles\roles.js" />
+    <None Include="wwwroot\js\Users\users.js" />
   </ItemGroup>
 
   <ItemGroup>
