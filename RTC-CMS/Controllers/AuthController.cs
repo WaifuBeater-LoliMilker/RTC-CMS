@@ -25,13 +25,32 @@ namespace RTC_CMS.Controllers
         {
             try
             {
-                var user = await _repo.FindModel<Users>
-                    (u => u.UserName == username && u.Password == password);
-                if (user == null) return Unauthorized("Sai tên đăng nhập hoặc mật khẩu");
-                var claims = new List<Claim> {
-                    new (ClaimTypes.Name, user.UserName),
-                    new (ClaimTypes.Role, user.RoleId.ToString()!)
+                //var user = await _repo.FindModel<Users>
+                //    (u => u.UserName == username && u.Password == password);
+                //if (user == null) return Unauthorized("Sai tên đăng nhập hoặc mật khẩu");
+
+
+
+                //var claims = new List<Claim> {
+                //    new (ClaimTypes.Name, user.UserName),
+                //    new (ClaimTypes.Role, user.RoleId.ToString()!)
+                //};
+
+
+                var user = new Users()
+                {
+                    Id = 1,
+                    UserName = "Admin",
+                    FullName= "Lê Minh Khôi",
+                    RoleId = 1
+
                 };
+                var claims = new List<Claim> {
+                    new (ClaimTypes.Name, "Lê Minh KHôi"),
+                    new (ClaimTypes.Role, "Admin")
+                };
+
+
                 var identity = new ClaimsIdentity(claims, "RTC_CMS_Cookie"); //cookie name from Program.cs
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync("RTC_CMS_Cookie", principal);

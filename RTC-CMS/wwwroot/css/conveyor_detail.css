@@ -1,0 +1,8 @@
+﻿
+svg > g > text {
+    font-size: 8px !important;
+}
+
+div > svg{
+    height: 60px !important
+}
