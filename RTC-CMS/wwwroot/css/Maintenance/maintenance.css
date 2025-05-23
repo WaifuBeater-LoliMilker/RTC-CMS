@@ -8,3 +8,66 @@
     main::-webkit-scrollbar {
         display: none; /* Safari and Chrome */
     }
+
+.tabulator-row .tabulator-cell:first-child {
+    color: blue;
+    text-decoration: underline;
+}
+
+.tabulator-row .tabulator-cell:nth-of-type(4) {
+    text-overflow: ellipsis;
+}
+
+.tabulator-cell span {
+    width: 45%;
+}
+
+    .tabulator-cell span:nth-child(2) {
+        color: orangered;
+        width: 10%;
+    }
+
+.tabulator-cell > div div {
+    width: 45%;
+    text-align: center;
+}
+
+    .tabulator-cell > div div:nth-child(2) {
+        color: orangered;
+        width: 10%;
+        text-align: center;
+    }
+
+.modal textarea {
+    min-height: 150px;
+}
+
+.tabulator-col-content, .tabulator-cell {
+    align-content: center;
+}
+.tabulator-row .tabulator-cell:nth-of-type(5) {
+    padding: 8px 12px
+}
+.status-cell {
+    text-align: center;
+    color: black;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+    .status-cell.status-1 {
+        background: yellow;
+    }
+    .status-cell.status-2 {
+        background: skyblue;
+    }
+    .status-cell.status-3 {
+        background: greenyellow;
+    }
+    .status-cell.status-4 {
+        background: orangered;
+    }
