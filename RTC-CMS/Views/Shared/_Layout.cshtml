@@ -52,7 +52,7 @@
 
     <!--echart-->
     <script src="~/libs/echarts/echarts.min.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!--iziToast-->
     <link href="~/libs/izitoast/css/izitoast.min.css" rel="stylesheet" />
@@ -67,7 +67,7 @@
         <a class="navbar-brand ps-3" href="/home">R-CMS</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <h3 class="text-white px-1 px-md-3 m-0">@ViewData["NavHeader"]</h3>
+        <h3 class="text-white px-1 px-md-3 m-0">@Html.Raw(ViewData["NavHeader"])</h3>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
@@ -93,78 +93,45 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-sidenav-menu-heading">Monitoring</div>
+                        <a class="nav-link collapsed" href="#"
+                           data-bs-toggle="collapse" data-bs-target="#monitor_menu"
+                           aria-expanded="false" aria-controls="monitor_menu">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts
+                            Giám sát vận hành
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse show" id="monitor_menu"
+                            aria-labelledby="monitorHeading" >
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                <a class="nav-link" href="layout-static.html">Giám sát trạng thái</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Giám sát tốc độ</a>
                             </nav>
                         </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
+                        <div class="sb-sidenav-menu-heading">Scheduled maintenance</div>
+                        <a class="nav-link" href="/maintenance">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Bảo trì định kỳ
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Category</div>
+                        <a class="nav-link collapsed" href="#"
+                           data-bs-toggle="collapse" data-bs-target="#category_menu"
+                           aria-expanded="false" aria-controls="category_menu">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Danh mục
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="401.html">401 Page</a>
-                                        <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a>
-                                    </nav>
-                                </div>
+                        <div class="collapse show" id="category_menu"
+                            aria-labelledby="monitorHeading" >
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/areas">Khu vực</a>
+                                <a class="nav-link" href="/machines">Máy</a>
+                                <a class="nav-link" href="/users">Người dùng</a>
+                                <a class="nav-link" href="/roles">Phân quyền</a>
+                                <a class="nav-link" href="/errors">Lỗi</a>
+                                <a class="nav-link" href="/machines-info">Chi tiết máy</a>
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Maintenance</div>
-                        <a class="nav-link" href="/maintenance">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-ticket"></i></div>
-                            Maintenance
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Areas</div>
-                        <a class="nav-link" href="/areas">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-book-open-reader"></i></div>
-                            Areas
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Error</div>
-                        <a class="nav-link" href="/errors">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                            Error
-                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">

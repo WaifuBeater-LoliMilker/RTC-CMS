@@ -5,7 +5,7 @@
 @{
     var user = Context.Session.GetObject<Users>("User");
     ViewData["Title"] = "Maintenance";
-    ViewData["NavHeader"] = "Maintenance";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Bảo dưỡng<span> <i class='fa-solid fa-angle-right'></i> Lịch sử";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/libs/moment/moment.min.js"></script>
@@ -15,7 +15,6 @@
 
 <div class="px-1 px-md-2 py-3">
     <div class="container-fluid px-1 px-md-2">
-        <h1 class="my-3">Lịch sử bảo dưỡng</h1>
         <div class="row g-3 px-1 px-md-3 mb-1 mb-md-2">
             <div class="col-12 col-md-5">
                 <div class="d-flex align-items-center gap-2">
@@ -23,7 +22,7 @@
                     <input type="text" class="form-control" id="search" autofocus />
                 </div>
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-6">
                 <div class="d-flex align-items-center gap-2">
                     <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái:</label>
                     <select class="form-control flex-grow-1" id="status_search">
@@ -37,7 +36,7 @@
                     <input type="text" class="form-control flex-grow-1" id="duration_search">
                 </div>
             </div>
-            <div class="col-12 col-md-2">
+            <div class="col-12 col-md-1">
                 <button class="btn btn-primary w-100">
                     <i class="fa-solid fa-search"></i>
                     Tìm kiếm
@@ -48,7 +47,16 @@
             <div class="card-header">
                 <button class="btn btn-primary" id="task_add"
                         data-bs-toggle="modal" data-bs-target="#modal_add_task">
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-plus"></i> Thêm
+                </button>
+                <button class="btn btn-success" id="task_edit">
+                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </button>
+                <button class="btn btn-secondary" id="task_copy">
+                    <i class="fa-solid fa-copy"></i> Copy
+                </button>
+                <button class="btn btn-danger" id="task_delete">
+                    <i class="fa-solid fa-trash"></i> Xóa
                 </button>
             </div>
             <div class="card-body">
@@ -82,7 +90,7 @@
                             <label class="fw-bold" for="assigned_name">Người nhận: </label>
                         </div>
                         <div class="col-8 col-md-auto">
-                            <input type="text" class="form-control" id="assigned_name" value="Khánh gà" />
+                            <input type="text" class="form-control" id="assigned_name" value="Đỗ Phúc" />
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -112,12 +120,30 @@
                             <label class="fw-bold" for="status">Trạng thái: </label>
                         </div>
                         <div class="col-auto">
-                            <select class="form-control flex-grow-1" id="status">
-                                <option value="1">Chưa tiến hành</option>
-                                <option value="2">Đang tiến hành</option>
-                                <option value="3">Đã hoàn thành</option>
-                                <option value="4">Đã hủy bỏ</option>
-                            </select>
+                            <div class="form-check flex-grow-1">
+                                <input class="form-check-input" type="radio" name="radioDefault">
+                                <label class="form-check-label" for="radioDefault1">
+                                    Chưa tiến hành
+                                </label>
+                            </div>
+                            <div class="form-check flex-grow-1">
+                                <input class="form-check-input" type="radio" name="radioDefault" checked>
+                                <label class="form-check-label" for="radioDefault2">
+                                    Đang tiến hành
+                                </label>
+                            </div>
+                            <div class="form-check flex-grow-1">
+                                <input class="form-check-input" type="radio" name="radioDefault" disabled>
+                                <label class="form-check-label" for="radioDefault2">
+                                    Đã hoàn thành
+                                </label>
+                            </div>
+                            <div class="form-check flex-grow-1">
+                                <input class="form-check-input" type="radio" name="radioDefault" disabled>
+                                <label class="form-check-label" for="radioDefault2">
+                                    Đã hủy bỏ
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </form>
