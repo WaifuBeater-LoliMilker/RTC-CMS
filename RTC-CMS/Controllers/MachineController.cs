@@ -99,6 +99,10 @@ namespace RTC_CMS.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [HttpGet("info")]
+        public IActionResult Info()
+        {
+            return View();
+        }
     }
 }

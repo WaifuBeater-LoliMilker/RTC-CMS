@@ -1,0 +1,155 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Http
+@using RTC_CMS.Common
+@using RTC_CMS.Models
+@{
+    var user = Context.Session.GetObject<Users>("User");
+    ViewData["Title"] = "Machine info";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Thiết bị<span> <i class='fa-solid fa-angle-right'></i> Thông tin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/machines/info.css" rel="stylesheet" />
+<div class="px-1 px-md-2 py-3">
+    <div class="container-fluid px-1 px-md-2">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_tabs">Show</button>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal_tabs" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#machine_info"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">
+                                Thông tin máy
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_history"
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                Lịch sử hoạt động
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#error_history"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                Lịch sử lỗi
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_status"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                Dữ liệu chạy máy
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_files"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                File đính kèm
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content pt-3">
+                        <div class="tab-pane fade show active" id="machine_info" role="tabpanel" aria-labelledby="home-tab">
+                            <ul>
+                                <li>Tên máy: Băng tải cấp liệu B204</li>
+                                <li>Mã máy: B204</li>
+                                <li>Khu vực: A-1</li>
+                                <li>IP: 172.135.1.12</li>
+                                <li>PORT: 3306</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="machine_history" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-6 d-flex flex-column justify-content-evenly" style="height: 500px;">
+                                    <div class="h-100 bg-primary text-white">A</div>
+                                    <div class="h-100 bg-success text-white">B</div>
+                                    <div class="h-100 bg-danger text-white">C</div>
+                                </div>
+
+                                <div class="col-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="error_history" role="tabpanel" aria-labelledby="contact-tab">
+                            <p>Here is the Contact tab content.</p>
+                        </div>
+                        <div class="tab-pane fade" id="machine_status" role="tabpanel" aria-labelledby="contact-tab">
+                            <p>Here is the Contact tab content.</p>
+                        </div>
+                        <div class="tab-pane fade" id="machine_files" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="mb-3">
+                                <button class="btn btn-primary" id="task_add"
+                                        data-bs-toggle="modal" data-bs-target="#modal_add_task">
+                                    <i class="fa-solid fa-plus"></i> Thêm
+                                </button>
+                                <button class="btn btn-success" id="task_edit">
+                                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                                </button>
+                                <button class="btn btn-secondary" id="task_copy">
+                                    <i class="fa-solid fa-copy"></i> Copy
+                                </button>
+                                <button class="btn btn-danger" id="task_delete">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <img src="~/imgs/excel.png" class="accordion-btn-img" /><span class="mx-1">Thông tin thiết bị.xlsx</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <img src="~/imgs/word.png" class="accordion-btn-img" /><span class="mx-1">Kế hoạch bảo dưỡng.docx</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <img src="~/imgs/pdf.png" class="accordion-btn-img" /><span class="mx-1">Bản thiết kế.pdf</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i> Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/machines/info.js"></script>
