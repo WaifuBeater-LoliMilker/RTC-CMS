@@ -15,13 +15,12 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="modal_tabs" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modal_tabs" data-bs-keyboard="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            @* <div class="modal-header">
+            </div> *@
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="modal-body">
                 <form>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -60,31 +59,80 @@
                     <!-- Tab panes -->
                     <div class="tab-content pt-3">
                         <div class="tab-pane fade show active" id="machine_info" role="tabpanel" aria-labelledby="home-tab">
-                            <ul>
-                                <li>Tên máy: Băng tải cấp liệu B204</li>
-                                <li>Mã máy: B204</li>
-                                <li>Khu vực: A-1</li>
-                                <li>IP: 172.135.1.12</li>
-                                <li>PORT: 3306</li>
-                            </ul>
+                            <div class="container mt-4">
+                                <div class="card shadow-lg rounded-4 p-4 mb-3">
+                                    <h5 class="card-title mb-3">Thông tin thiết bị</h5>
+                                    <ul class="list-unstyled row">
+                                        <li class="col-md-6 mb-2"><strong>Tên máy:</strong> Băng tải cấp liệu B204</li>
+                                        <li class="col-md-6 mb-2"><strong>Mã máy:</strong> B204</li>
+                                        <li class="col-md-6 mb-2"><strong>Khu vực:</strong> A-1</li>
+                                        <li class="col-md-6 mb-2"><strong>IP:</strong> 172.135.1.12</li>
+                                        <li class="col-md-6 mb-2"><strong>PORT:</strong> 3306</li>
+                                    </ul>
+                                </div>
+                                <div class="card shadow-lg rounded-4 p-4 mb-3">
+                                    <h5 class="card-title mb-3">Thông tin thiết bị</h5>
+                                    <ul class="list-unstyled row">
+                                        <li class="col-md-6 mb-2"><strong>Tên máy:</strong> Băng tải cấp liệu B205</li>
+                                        <li class="col-md-6 mb-2"><strong>Mã máy:</strong> B205</li>
+                                        <li class="col-md-6 mb-2"><strong>Khu vực:</strong> A-2</li>
+                                        <li class="col-md-6 mb-2"><strong>IP:</strong> 172.126.1.2</li>
+                                        <li class="col-md-6 mb-2"><strong>PORT:</strong> 443</li>
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="tab-pane fade" id="machine_history" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-6 d-flex flex-column justify-content-evenly" style="height: 500px;">
-                                    <div class="h-100 bg-primary text-white">A</div>
-                                    <div class="h-100 bg-success text-white">B</div>
-                                    <div class="h-100 bg-danger text-white">C</div>
-                                </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                        <div class="h-100 mb-1 border border-primary">A</div>
+                                        <div class="h-100 mb-1 border border-danger">B</div>
+                                        <div class="h-100 mb-1 border border-success">C</div>
+                                    </div>
 
-                                <div class="col-6">
+                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                        <div class="chart c-blue mb-1 mx-auto"></div>
+                                        <div class="chart c-green mb-1 mx-auto"></div>
+                                        <div class="chart c-red mb-1 mx-auto"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="error_history" role="tabpanel" aria-labelledby="contact-tab">
-                            <p>Here is the Contact tab content.</p>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                        <div class="h-100 mb-1 border border-primary">A</div>
+                                        <div class="h-100 mb-1 border border-danger">B</div>
+                                        <div class="h-100 mb-1 border border-success">C</div>
+                                    </div>
+
+                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                        <div class="time_line_chart c-blue mb-1 mx-1"></div>
+                                        <div class="time_line_chart c-green mb-1 mx-1"></div>
+                                        <div class="time_line_chart c-red mb-1 mx-1"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="machine_status" role="tabpanel" aria-labelledby="contact-tab">
-                            <p>Here is the Contact tab content.</p>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                        <div class="h-100 mb-1 border border-primary">A</div>
+                                        <div class="h-100 mb-1 border border-danger">B</div>
+                                        <div class="h-100 mb-1 border border-success">C</div>
+                                    </div>
+
+                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                        <div class="chart c-blue mb-1 mx-auto"></div>
+                                        <div class="chart c-green mb-1 mx-auto"></div>
+                                        <div class="chart c-red mb-1 mx-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="machine_files" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="mb-3">
@@ -111,7 +159,11 @@
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                            <div class="d-flex justify-content-center">
+                                                <iframe style="width: 800px;height:250px" src="https://rtceduvnnh-my.sharepoint.com/personal/tech20_rtc_edu_vn/_layouts/15/Doc.aspx?sourcedoc={9b7183a5-3f59-4c72-ab85-e3e4a3e86f7c}&amp;action=embedview" frameborder="0">
+                                                    This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.
+                                                </iframe>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -144,11 +196,11 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            @* <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fa-solid fa-xmark"></i> Đóng
                 </button>
-            </div>
+            </div> *@
         </div>
     </div>
 </div>

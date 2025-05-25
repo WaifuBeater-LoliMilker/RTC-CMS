@@ -5,17 +5,25 @@
 @{
     var user = Context.Session.GetObject<Users>("User");
     ViewData["Title"] = "Error";
-    ViewData["NavHeader"] = "Error";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Lỗi<span>";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/css/errors/errors.css" rel="stylesheet" />
 <div class="px-1 px-md-2 py-3">
     <div class="container-fluid px-1 px-md-2">
-        <h1 class="my-3">Lỗi</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <button class="btn btn-primary" id="error_add">
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-plus"></i> Thêm
+                </button>
+                <button class="btn btn-success" id="task_edit">
+                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </button>
+                <button class="btn btn-secondary" id="task_copy">
+                    <i class="fa-solid fa-copy"></i> Copy
+                </button>
+                <button class="btn btn-danger" id="task_delete">
+                    <i class="fa-solid fa-trash"></i> Xóa
                 </button>
             </div>
             <div class="card-body">
