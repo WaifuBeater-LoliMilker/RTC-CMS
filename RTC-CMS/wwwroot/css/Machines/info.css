@@ -1,6 +1,6 @@
 ﻿.chart {
-    width: 478px;
-    height: 200px;
+    width: 800px;
+    height: 500px;
 }
 
 .accordion-btn-img {
@@ -10,8 +10,8 @@
 
 .btn-close {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 20px;
+    top: 15px;
 }
 
 .device-info {
@@ -69,3 +69,16 @@
             color: #fff;
             font-weight: 500;
         }
+
+#time_line_chart_1{
+    width: 900px;
+}
+#time_line_chart_2{
+    width: 910px;
+}
+#time_line_chart_3 {
+    width: 920px;
+}
+.card-body, .row {
+    width: 100%;
+}
