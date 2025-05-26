@@ -22,4 +22,6 @@ public partial class Machines
     public string PortPlc { get; set; }
 
     public int? StationNumber { get; set; }
+
+    public string PlcadressSpeed { get; set; }
 }

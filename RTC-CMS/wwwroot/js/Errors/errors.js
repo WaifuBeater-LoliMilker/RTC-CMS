@@ -26,32 +26,32 @@ function drawTable() {
         columns: [
             { title: "Mã lỗi", field: "code", formatter: 'html', width: '20%' },
             { title: "Tên lỗi", field: "name", formatter: 'html', minWidth: '70%' },
-            {
-                title: "Actions",
-                formatter: function (cell, formatterParams, onRendered) {
-                    const rowData = cell.getRow().getData();
-                    const id = rowData.id;
+            //{
+            //    title: "Actions",
+            //    formatter: function (cell, formatterParams, onRendered) {
+            //        const rowData = cell.getRow().getData();
+            //        const id = rowData.id;
 
-                    if (rowData.isNew) {
-                        return `<button class="btn btn-primary btn-save" data-id="${id}">
-                                    <i class="fa-solid fa-floppy-disk"></i>
-                                </button>
-                                <button class="btn btn-secondary btn-cancel" data-id="${id}">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </button>`;
-                    } else {
-                        return `<button class="btn btn-success btn-edit" data-id="${id}">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                                <button class="btn btn-danger btn-delete" data-id="${id}">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>`;
-                    }
-                },
-                width: 150,
-                hozAlign: "center",
-                cellClick: cellClick
-            }
+            //        if (rowData.isNew) {
+            //            return `<button class="btn btn-primary btn-save" data-id="${id}">
+            //                        <i class="fa-solid fa-floppy-disk"></i>
+            //                    </button>
+            //                    <button class="btn btn-secondary btn-cancel" data-id="${id}">
+            //                        <i class="fa-solid fa-xmark"></i>
+            //                    </button>`;
+            //        } else {
+            //            return `<button class="btn btn-success btn-edit" data-id="${id}">
+            //                        <i class="fa-solid fa-pen-to-square"></i>
+            //                    </button>
+            //                    <button class="btn btn-danger btn-delete" data-id="${id}">
+            //                        <i class="fa-solid fa-trash"></i>
+            //                    </button>`;
+            //        }
+            //    },
+            //    width: 150,
+            //    hozAlign: "center",
+            //    cellClick: cellClick
+            //}
         ],
     })
 }

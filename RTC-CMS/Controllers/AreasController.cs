@@ -40,7 +40,6 @@ namespace RTC_CMS.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

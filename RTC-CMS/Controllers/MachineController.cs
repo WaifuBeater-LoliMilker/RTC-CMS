@@ -85,5 +85,24 @@ namespace RTC_CMS.Controllers
             }
         }
 
+
+        [HttpGet("get-all-machine-items")]
+        public async Task<IActionResult> GetAllMachineItems()
+        {
+            try
+            {
+                var machineItems = await _repo.GetAll<MachineItems>();
+                return Ok(machineItems);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("info")]
+        public IActionResult Info()
+        {
+            return View();
+        }
     }
 }

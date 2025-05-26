@@ -12,4 +12,8 @@ public partial class MachineAdressPlc
     public string AdressPlc { get; set; }
 
     public int? MachineItemId { get; set; }
+
+    public string NameAdressPlc { get; set; }
+
+    public string TypeAdressPlc { get; set; }
 }

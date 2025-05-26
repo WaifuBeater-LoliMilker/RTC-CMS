@@ -74,13 +74,17 @@ public partial class rtc_cmsContext : DbContext
 
             entity.ToTable("machine_adress_plc");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AdressPlc)
                 .HasMaxLength(45)
                 .HasColumnName("Adress_PLC");
             entity.Property(e => e.MachineItemId).HasColumnName("Machine_Item_ID");
+            entity.Property(e => e.NameAdressPlc)
+                .HasMaxLength(105)
+                .HasColumnName("Name_Adress_PLC");
+            entity.Property(e => e.TypeAdressPlc)
+                .HasMaxLength(45)
+                .HasColumnName("Type_Adress_PLC");
         });
 
         modelBuilder.Entity<MachineErrors>(entity =>
@@ -146,6 +150,9 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.MachineCode).HasMaxLength(45);
             entity.Property(e => e.MachineName).HasMaxLength(145);
             entity.Property(e => e.OperateThreshold).HasPrecision(18, 2);
+            entity.Property(e => e.PlcadressSpeed)
+                .HasMaxLength(45)
+                .HasColumnName("PLCAdressSpeed");
             entity.Property(e => e.PortPlc)
                 .HasMaxLength(45)
                 .HasColumnName("Port_PLC");
@@ -167,6 +174,7 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.DateStartActual).HasColumnType("datetime");
             entity.Property(e => e.DateStartPlan).HasColumnType("datetime");
             entity.Property(e => e.MachineItemId).HasColumnName("MachineItemID");
+            entity.Property(e => e.Status).HasComment("1: chưa tiến hành, 2: đang tiến hành, 3: đã hoàn thành, 4: đã hủy bỏ");
         });
 
         modelBuilder.Entity<OperateHistories>(entity =>
