@@ -24,4 +24,6 @@ public partial class Machines
     public int? StationNumber { get; set; }
 
     public string PlcadressSpeed { get; set; }
+
+    public int? Status { get; set; }
 }

@@ -15,5 +15,5 @@ public partial class MachineAdressPlc
 
     public string NameAdressPlc { get; set; }
 
-    public string TypeAdressPlc { get; set; }
+    public int? TypeAdressPlc { get; set; }
 }

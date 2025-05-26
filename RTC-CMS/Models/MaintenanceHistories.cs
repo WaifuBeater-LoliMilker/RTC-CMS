@@ -26,6 +26,7 @@ public partial class MaintenanceHistories
     public int? AsignId { get; set; }
 
     public int? ApprovedId { get; set; }
+
     /// <summary>
     /// 1: chưa tiến hành, 2: đang tiến hành, 3: đã hoàn thành, 4: đã hủy bỏ
     /// </summary>

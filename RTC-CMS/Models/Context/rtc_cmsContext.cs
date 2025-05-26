@@ -82,9 +82,7 @@ public partial class rtc_cmsContext : DbContext
             entity.Property(e => e.NameAdressPlc)
                 .HasMaxLength(105)
                 .HasColumnName("Name_Adress_PLC");
-            entity.Property(e => e.TypeAdressPlc)
-                .HasMaxLength(45)
-                .HasColumnName("Type_Adress_PLC");
+            entity.Property(e => e.TypeAdressPlc).HasColumnName("Type_Adress_PLC");
         });
 
         modelBuilder.Entity<MachineErrors>(entity =>

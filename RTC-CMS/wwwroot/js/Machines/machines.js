@@ -1,5 +1,6 @@
 ﻿let table;
 let machines;
+//var chartTemp;
 $(async function () {
 
     const areas = await GetAllArea();
@@ -8,21 +9,67 @@ $(async function () {
     const machineItems = await GetAllMachineItem();
 
     // Tạo dữ liệu lồng nhau
+    const result = machines.map(machine => {
+        const area = areas.find(a => a.Id === machine.AreaId); // Gộp thông tin area
+        const items = machineItems.filter(item => item.MachineId === machine.Id); // Danh sách item theo MachineId
 
+        return {
+            ...machine,
+            AreaName: area.AreaName,
+            items: items     // danh sách machine item
+        };
+    });
 
     //define table
     table = new Tabulator("#machine_table", {
-        height: "311px",
+        height: "70vh",
         layout: "fitColumns",
         columnDefaults: {
             resizable: true,
         },
-        data: machines,
+        data: result,
+        //selectableRows: 1,
         columns: [
-            { title: "Make", field: "make" },
-            { title: "Model", field: "model" },
-            { title: "Registration", field: "reg" },
-            { title: "Color", field: "color" },
+            { title: "Mã máy", field: "MachineCode", headerHozAlign: "center" },
+            {
+                title: "Tên máy", field: "MachineName", headerHozAlign: "center",
+                formatter: function (cell, formatterParams) {
+                    var value = cell.getValue();
+                    return `<a href="#" class="open-modal-link" data-code="${value}" style="text-decoration: none; color: #007bff;">${value}</a>`;
+                }
+            },
+            { title: "Khu vực", field: "AreaName", headerHozAlign: "center" },
+            {
+                title: "Trạng thái",
+                field: "Status",
+                headerHozAlign: "center",
+                hozAlign: "center",
+                formatter: function (cell) {
+                    const value = cell.getValue();
+                    const map = {
+                        1: { label: "Đang chạy", color: "#28a745" },    // xanh lá
+                        2: { label: "Dừng", color: "#6c757d" },    // xám
+                        3: { label: "Lỗi", color: "#dc3545" },     // đỏ
+                        4: { label: "Bảo trì", color: "#ffc107" }, // vàng
+                    };
+
+                    const item = map[value] || { label: "Không rõ", color: "#dee2e6" };
+
+                    return `<span style="
+            display: inline-block;
+            width: 100px;
+            text-align: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: ${item.color};
+            color: white;
+            font-weight: bold;
+        ">${item.label}</span>`;
+                }
+            },
+            { title: "Ngưỡng vận hành (h)", field: "OperateThreshold", headerHozAlign: "center", hozAlign: "right" },
+            { title: "IP", field: "IpPlc", headerHozAlign: "center" },
+            { title: "Port", field: "PortPlc", headerHozAlign: "center" },
         ],
         rowFormatter: function (row) {
             //create and style holder elements
@@ -33,6 +80,7 @@ $(async function () {
             holderEl.style.padding = "10px 30px 10px 10px";
             holderEl.style.borderTop = "1px solid #333";
             holderEl.style.borderBotom = "1px solid #333";
+            holderEl.style.display = "none"; // ẩn mặc định
 
 
             tableEl.style.border = "1px solid #333";
@@ -40,78 +88,418 @@ $(async function () {
             holderEl.appendChild(tableEl);
 
             row.getElement().appendChild(holderEl);
+            row._subTableHolder = holderEl; // gán để tiện truy cập
 
-            var subTable = new Tabulator(tableEl, {
+            row._subTable = new Tabulator(tableEl, {
                 layout: "fitColumns",
-                data: machineItems.find(p=>p.MachineId = row.getData().Id),
+                data: row.getData().items,
+                selectableRows: 1,
                 columns: [
-                    { title: "Date", field: "date", sorter: "date" },
-                    { title: "Engineer", field: "engineer" },
-                    { title: "Action", field: "actions" },
+                    { title: "Mã thiết bị", field: "MachineItemCode" },
+                    {
+                        title: "Tên thiết bị", field: "MachineItemName",
+                        formatter: function (cell, formatterParams) {
+                            var value = cell.getValue();
+                            return `<a href="#" 
+                                        class="open-modal-link" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modal_machine_items"
+                                        data-code="${value}" 
+                                        style="text-decoration: none; color: #007bff;">
+                                        ${value}
+                                    </a>`;
+                        }
+                    },
+                    { title: "Ngưỡng vận hành (h)", field: "OperateThreshold" },
+                    //{ title: "MachineItemType", field: "MachineItemType" },
                 ]
             })
         },
     });
 
-
-    //table = new Tabulator("#machine_table", {
-    //    data: machines,
-    //    layout: "fitColumns",
-    //    columns: [
-    //        { title: "ID", field: "Id", visible: false },
-    //        { title: "MachineCode", field: "MachineCode" },
-    //        { title: "MachineName", field: "MachineName" },
-    //        { title: "AreaId", field: "AreaId" },
-    //        { title: "Operate Threshold", field: "OperateThreshold" },
-    //        {
-    //            title: "Actions",
-    //            formatter: function (cell, formatterParams, onRendered) {
-    //                const id = cell.getRow().getData().Id;
-    //                return `
-    //            <button class="btn btn-success btn-edit"  data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
-    //            <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
-    //            `;
-    //            },
-    //            width: 150,
-    //            hozAlign: "left",
-    //            cellClick: CellClick
-    //        }
-    //    ]
-    //});
-
-    $('#machine_area').select2({
-        placeholder: "Chọn khu vực",
-        data: areas.map(a => ({
-            id: a.Id,
-            text: a.AreaName
-        }))
-    });
-
-    $('.modal').on('click', '#btn_savechange', function () {
-        var mode = $('#btn_savechange').data('mode');
-        if (mode == "insert") {
-
-            CreateMachine();
+    table.on("rowClick", function (e, row) {
+        if (row._subTableHolder) {
+            row._subTableHolder.style.display = row._subTableHolder.style.display === "none" ? "block" : "none";
+        } else {
+            row.normalizeHeight(); // gọi rowFormatter nếu chưa được render
+            setTimeout(() => {
+                if (row._subTableHolder) {
+                    row._subTableHolder.style.display = "block";
+                }
+            }, 10);
         }
-        else {
-            UpdateMachine();
-            location.reload();
+    });
+
+
+
+    var tableMachineItemVariant = new Tabulator("#machineitem_variant", {
+        height: "300px",
+        layout: "fitColumns",
+        columns: [
+            {
+                formatter: "buttonCross",
+                width: 40,
+                hozAlign: "center",
+                cellClick: function (e, cell) {
+                    cell.getRow().delete();
+                }
+            },
+            {
+                title: "Thông số",
+                field: "type",
+                editor: "list",
+                editorParams: {
+                    values: {
+                        1: "Nhiệt độ",
+                        2: "Độ rung",
+                        3: "Dòng điện",
+                        4: "Điện áp",
+                        5: "Tần số"
+                    }
+                },
+                formatter: function (cell) {
+                    var map = {
+                        1: "Nhiệt độ",
+                        2: "Độ rung",
+                        3: "Dòng điện",
+                        4: "Điện áp",
+                        5: "Tần số"
+                    };
+                    return map[cell.getValue()] || "";
+                }
+            },
+            {
+                title: "Giá trị Min",
+                field: "min",
+                editor: "number",
+                validator: ["required", "numeric"],
+            },
+            {
+                title: "Giá trị Max",
+                field: "max",
+                editor: "number",
+                validator: ["required", "numeric"],
+            },
+
+        ],
+    });
+
+    $("#btnAddVariant").on("click", function () {
+        tableMachineItemVariant.addRow({});
+    });
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    const dataTemp = generateTemperatureData(today);
+
+    var chartTemp = echarts.init(document.getElementById("chart_temperature"));
+
+    var option = {
+        title: {
+            text: "Nhiệt độ",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bold',
+                fontFamily: 'Arial',
+                color: '#333'
+            },
+           
+        },
+        xAxis: {
+            type: "category",
+            data: dataTemp.map(d => d.time),
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        series: [{
+            data: dataTemp.map(d => d.temperature),
+            type: "line",
+            lineStyle: {
+                color: "red"
+            },
+            itemStyle: {
+                color: "red"
+            },
+            markLine: {
+                symbol: "none",
+                label: {
+                    formatter: '{b}: {c}°C',
+                    fontSize: 10
+                },
+                lineStyle: {
+                    type: "dashed",
+                    color: "blue"
+                },
+                data: [
+                    { yAxis: 40, name: "Min Spec" },
+                    { yAxis: 90, name: "Max Spec" }
+                ]
+            }
+        }]
+    };
+
+    chartTemp.setOption(option);
+    // Khởi tạo bảng Tabulator
+    var tabledatatemp = new Tabulator("#table_data_temp", {
+        layout: "fitColumns",
+        height: "70vh",
+        data: dataTemp,
+
+        columns: [
+            { title: "Thời gian", field: "time", hozAlign: "center" },
+            { title: "Nhiệt độ (°C)", field: "temperature", hozAlign: "center" }
+        ],
+    });
+
+    const dataRung = generateRungData(today);
+
+    var chartRung = echarts.init(document.getElementById("chart_rung"));
+
+    var optionRung = {
+        title: {
+            text: "Độ rung",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bold',
+                fontFamily: 'Arial',
+                color: '#333'
+            },
+
+        },
+        xAxis: {
+            type: "category",
+            data: dataRung.map(d => d.time),
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        series: [{
+            data: dataRung.map(d => d.rung),
+            type: "line",
+            lineStyle: {
+                color: "blue"
+            },
+            itemStyle: {
+                color: "blue"
+            }
+        }]
+    };
+
+    chartRung.setOption(optionRung);
+    // Khởi tạo bảng Tabulator
+    var tabledatarung = new Tabulator("#table_data_rung", {
+        layout: "fitColumns",
+        height: "70vh",
+        data: dataRung,
+
+        columns: [
+            { title: "Thời gian", field: "time", hozAlign: "center" },
+            { title: "Độ rung", field: "rung", hozAlign: "center" }
+        ],
+    });
+
+
+
+    //Dòng
+
+    const dataDong = generateDongData(today);
+
+    var chartDong = echarts.init(document.getElementById("chart_dong"));
+
+    var optionDong = {
+        title: {
+            text: "Dòng điện",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bold',
+                fontFamily: 'Arial',
+                color: '#333'
+            },
+
+        },
+        xAxis: {
+            type: "category",
+            data: dataRung.map(d => d.time),
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        series: [{
+            data: dataRung.map(d => d.rung),
+            type: "line",
+            lineStyle: {
+                color: "blue"
+            },
+            itemStyle: {
+                color: "blue"
+            }
+        }]
+    };
+
+    chartDong.setOption(optionDong);
+    // Khởi tạo bảng Tabulator
+    var tabledatadong = new Tabulator("#table_data_dong", {
+        layout: "fitColumns",
+        height: "70vh",
+        data: dataDong,
+
+        columns: [
+            { title: "Thời gian", field: "time", hozAlign: "center" },
+            { title: "Dòng điện", field: "rung", hozAlign: "center" }
+        ],
+    });
+
+
+
+    const dataDien = generateDienData(today);
+
+    var chartDien = echarts.init(document.getElementById("chart_dien"));
+
+    var optionDien = {
+        title: {
+            text: "Điện áp",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bold',
+                fontFamily: 'Arial',
+                color: '#333'
+            },
+
+        },
+        xAxis: {
+            type: "category",
+            data: dataRung.map(d => d.time),
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        series: [{
+            data: dataRung.map(d => d.rung),
+            type: "line",
+            lineStyle: {
+                color: "blue"
+            },
+            itemStyle: {
+                color: "blue"
+            }
+        }]
+    };
+
+    chartDien.setOption(optionDien);
+    // Khởi tạo bảng Tabulator
+    var tabledatadien = new Tabulator("#table_data_dien", {
+        layout: "fitColumns",
+        height: "70vh",
+        data: dataDien,
+
+        columns: [
+            { title: "Thời gian", field: "time", hozAlign: "center" },
+            { title: "Dòng điện", field: "rung", hozAlign: "center" }
+        ],
+    });
+
+
+    const dataTanSo = generateTanSoData(today);
+
+    var chartTanSo = echarts.init(document.getElementById("chart_tanso"));
+
+    var optionTanSo = {
+        title: {
+            text: "Tần số",
+            left: "center",
+            top: "top",
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bold',
+                fontFamily: 'Arial',
+                color: '#333'
+            },
+
+        },
+        xAxis: {
+            type: "category",
+            data: dataRung.map(d => d.time),
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: {
+                fontSize: 14
+            }
+        },
+        series: [{
+            data: dataRung.map(d => d.rung),
+            type: "line",
+            lineStyle: {
+                color: "blue"
+            },
+            itemStyle: {
+                color: "blue"
+            }
+        }]
+    };
+
+    chartTanSo.setOption(optionTanSo);
+    // Khởi tạo bảng Tabulator
+    var tabledatatanso = new Tabulator("#table_data_tanso", {
+        layout: "fitColumns",
+        height: "70vh",
+        data: dataDien,
+
+        columns: [
+            { title: "Thời gian", field: "time", hozAlign: "center" },
+            { title: "Tần số", field: "rung", hozAlign: "center" }
+        ],
+    });
+    //chartTemp = echarts.init(document.getElementById('chart_temperature'));
+    // Flatpickr (datetime picker)
+    flatpickr("#datePicker", {
+        dateFormat: "Y-m-d",
+        defaultDate: new Date(),
+        onChange: function (selectedDates, dateStr) {
+            //loadTemperatureData(dateStr);
         }
-        $('#staticBackdrop input').val('');
-        $('#staticBackdrop select').val('');
     });
-    $('#machine_add').on('click', function () {
-        // XÓA trắng các input/select trong modal
-        $('#staticBackdrop input').val('');
-        $('#staticBackdrop select').val('');
-
-        $('#btn_savechange').data('mode', 'insert'); // Thiết lập chế độ là update
-
-        // Cập nhật tiêu đề modal nếu cần
-        $('#staticBackdropLabel').text('Thêm mới băng tải');
-
+    window.addEventListener('load', function () {
+        chartTemp.resize(); // đảm bảo biểu đồ chiếm đúng kích thước sau khi DOM load
     });
 
+ 
 });
 
 function GetAllMachine() {
@@ -154,6 +542,7 @@ function GetAllArea() {
         });
     });
 }
+
 function CellClick(e, cell) {
     const target = e.target;
     const id = $(target).data("id");
@@ -190,59 +579,6 @@ function CellClick(e, cell) {
     }
 }
 
-function CreateMachine() {
-
-    var machineData = {
-        MachineCode: $('#machine_machinecode').val(),
-        MachineName: $('#machine_machinename').val(),
-        AreaId: $('#machine_area').val(),
-        OperateThreshold: $('#machine_operatorthreshold').val()
-    }
-    $.ajax({
-        url: 'machines/create', // Đường dẫn API của bạn
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(machineData), // Chuyển đổi dữ liệu thành JSON
-        success: function (response) {
-            alert('Tạo băng tải thành công!');
-            table.addData([response]);
-            $('.modal').modal('hide');
-            GetAllMachine();
-        },
-        error: function (xhr, status, error) {
-            alert('Có lỗi xảy ra: ' + error);
-        }
-    });
-
-}
-
-function UpdateMachine() {
-    var id = $('#btn_savechange').data('id');
-    console.log(id);
-    var machineData = {
-        Id: id,
-        MachineCode: $('#machine_machinecode').val(),
-        MachineName: $('#machine_machinename').val(),
-        AreaId: $('#machine_area').val(),
-        OperateThreshold: $('#machine_operatorthreshold').val()
-    }
-    $.ajax({
-        url: 'machines/update', // Đường dẫn API của bạn
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(machineData), // Chuyển đổi dữ liệu thành JSON
-        success: function (response) {
-            alert('Cập nhật băng tải thành công!');
-            $('.modal').modal('hide');
-            location.reload();
-        },
-        error: function (xhr, status, error) {
-            alert('Có lỗi xảy ra: ' + error);
-        }
-    });
-
-}
-
 function GetAllMachineItem() {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -258,3 +594,131 @@ function GetAllMachineItem() {
         });
     });
 }
+
+function generateTemperatureData(dateStr) {
+    let data = [];
+    let baseTime = new Date(dateStr + " 00:00:00");
+    for (let i = 0; i <  60 * 60 / 5; i++) { // 24h * 60ph * 60s / 5s
+        let time = new Date(baseTime.getTime() + i * 5 * 1000); // mỗi 5 giây
+        let temperature = (Math.random() * 5 + 50).toFixed(2); // 50–55 độ
+        data.push({
+            time: time.toTimeString().slice(0, 8), // định dạng HH:mm:ss
+            temperature: parseFloat(temperature)
+        });
+    }
+
+    return data;
+}
+
+function generateRungData(dateStr) {
+    let data = [];
+    let baseTime = new Date(dateStr + " 00:00:00");
+    for (let i = 0; i < 60 * 60 / 5; i++) { // 24h * 60ph * 60s / 5s
+        let time = new Date(baseTime.getTime() + i * 5 * 1000); // mỗi 5 giây
+        let rung = (Math.random() * 0.1 + 1.18).toFixed(2); // 50–55 độ
+        data.push({
+            time: time.toTimeString().slice(0, 8), // định dạng HH:mm:ss
+            rung: parseFloat(rung)
+        });
+    }
+
+    return data;
+}
+
+function generateDongData(dateStr) {
+    let data = [];
+    let baseTime = new Date(dateStr + " 00:00:00");
+    for (let i = 0; i < 60 * 60 / 5; i++) { // 24h * 60ph * 60s / 5s
+        let time = new Date(baseTime.getTime() + i * 5 * 1000); // mỗi 5 giây
+        let rung = (Math.random() * 0.2 + 2).toFixed(2); 
+        data.push({
+            time: time.toTimeString().slice(0, 8), // định dạng HH:mm:ss
+            rung: parseFloat(rung)
+        });
+    }
+
+    return data;
+}
+
+function generateDienData(dateStr) {
+    let data = [];
+    let baseTime = new Date(dateStr + " 00:00:00");
+    for (let i = 0; i < 60 * 60 / 5; i++) { // 24h * 60ph * 60s / 5s
+        let time = new Date(baseTime.getTime() + i * 5 * 1000); // mỗi 5 giây
+        let rung = (Math.random() * 0.5 + 220).toFixed(2);
+        data.push({
+            time: time.toTimeString().slice(0, 8), // định dạng HH:mm:ss
+            rung: parseFloat(rung)
+        });
+    }
+
+    return data;
+}
+
+function generateTanSoData(dateStr) {
+    let data = [];
+    let baseTime = new Date(dateStr + " 00:00:00");
+    for (let i = 0; i < 60 * 60 / 5; i++) { // 24h * 60ph * 60s / 5s
+        let time = new Date(baseTime.getTime() + i * 5 * 1000); // mỗi 5 giây
+        let rung = (Math.random() * 0.5 + 54).toFixed(2);
+        data.push({
+            time: time.toTimeString().slice(0, 8), // định dạng HH:mm:ss
+            rung: parseFloat(rung)
+        });
+    }
+
+    return data;
+}
+
+
+
+//function CreateMachine() {
+//    var machineData = {
+//        MachineCode: $('#machine_machinecode').val(),
+//        MachineName: $('#machine_machinename').val(),
+//        AreaId: $('#machine_area').val(),
+//        OperateThreshold: $('#machine_operatorthreshold').val()
+//    }
+//    $.ajax({
+//        url: 'machines/create', // Đường dẫn API của bạn
+//        type: 'POST',
+//        contentType: 'application/json',
+//        data: JSON.stringify(machineData), // Chuyển đổi dữ liệu thành JSON
+//        success: function (response) {
+//            alert('Tạo băng tải thành công!');
+//            table.addData([response]);
+//            $('.modal').modal('hide');
+//            GetAllMachine();
+//        },
+//        error: function (xhr, status, error) {
+//            alert('Có lỗi xảy ra: ' + error);
+//        }
+//    });
+//}
+
+//function UpdateMachine() {
+//    var id = $('#btn_savechange').data('id');
+//    console.log(id);
+//    var machineData = {
+//        Id: id,
+//        MachineCode: $('#machine_machinecode').val(),
+//        MachineName: $('#machine_machinename').val(),
+//        AreaId: $('#machine_area').val(),
+//        OperateThreshold: $('#machine_operatorthreshold').val()
+//    }
+//    $.ajax({
+//        url: 'machines/update', // Đường dẫn API của bạn
+//        type: 'POST',
+//        contentType: 'application/json',
+//        data: JSON.stringify(machineData), // Chuyển đổi dữ liệu thành JSON
+//        success: function (response) {
+//            alert('Cập nhật băng tải thành công!');
+//            $('.modal').modal('hide');
+//            location.reload();
+//        },
+//        error: function (xhr, status, error) {
+//            alert('Có lỗi xảy ra: ' + error);
+//        }
+//    });
+
+//}
