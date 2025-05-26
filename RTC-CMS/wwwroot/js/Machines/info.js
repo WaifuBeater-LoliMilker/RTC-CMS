@@ -17,14 +17,14 @@
                 Math.floor(base + Math.random() * 50 - 25)
             );
         };
-
+        const stableSpeeds = [68, 72, 71, 69, 70, 67, 73, 74, 66, 70];
         const option = {
             title: {
-                text: `Động cơ ${index + 1}`,
+                text: `Tốc độ`,
                 left: 'center',
                 top: 'top',
                 textStyle: {
-                    fontSize: 16
+                    fontSize: 20
                 }
             },
             xAxis: {
@@ -41,7 +41,7 @@
                 }
             },
             series: [{
-                data: generateData(),
+                data: stableSpeeds,
                 type: 'line',
                 lineStyle: {
                     color: color
@@ -54,12 +54,6 @@
 
         chart.setOption(option);
     });
-    const timelineChartIds = [
-        'time_line_chart_1',
-        'time_line_chart_2',
-        'time_line_chart_3'
-    ];
-
     google.charts.load('current', { 'packages': ['timeline'] });
     google.charts.setOnLoadCallback(() => {
         $('[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -69,7 +63,9 @@
             });
         });
     });
-    drawTable()
+    drawTable1()
+    drawTable2()
+    drawTable3()
 });
 function GenChartTimeLine(id) {
     const container = document.getElementById(id);
@@ -111,13 +107,24 @@ function GenChartTimeLine(id) {
 
     chart.draw(dataTable, options);
 }
-function drawTable() {
+function drawTable1() {
     function formatDate(date) {
         const pad = n => String(n).padStart(2, '0');
         return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
     }
-
-    const tasks = Array.from({ length: 10 }, () => {
+    const status = [
+        "Hoạt động bình thường",
+        "Hoạt động bình thường",
+        "Hoạt động bình thường",
+        "Hoạt động bình thường",
+        "Hoạt động bình thường",
+        "Lỗi",
+        "Lỗi",
+        "Hoạt động bình thường",
+        "Hoạt động bình thường",
+        "Hoạt động bình thường"
+    ]
+    const tasks = Array.from({ length: 10 }, (_, i) => {
         const date = new Date();
 
         date.setHours(Math.floor(Math.random() * 24));
@@ -126,11 +133,67 @@ function drawTable() {
 
         return {
             time: formatDate(date),
-            value: Math.floor(Math.random() * 100) + 1
+            value: status[i % status.length]
         };
     });
 
-    $('#machine_history_table,#error_history_table,#machine_status_table').tabulator({
+    $('#machine_history_table').tabulator({
+        width: "auto",
+        data: tasks,
+        layout: "fitDataStretch",
+        pagination: true,
+        paginationSize: 10,
+        rowHeight: 52,
+        rowHeader: {
+            headerSort: false,
+            resizable: false,
+            frozen: true,
+            headerHozAlign: "center",
+            hozAlign: "center",
+            formatter: "rowSelection",
+            titleFormatter: "rowSelection", cellClick: function (e, cell) {
+                cell.getRow().toggleSelect();
+            },
+            width: '3px'
+        },
+        columns: [
+            { title: "Thời gian", field: "time", width: 200 },
+            { title: "Trạng thái", field: "value" },
+        ],
+    })
+}
+function drawTable2() {
+    function formatDate(date) {
+        const pad = n => String(n).padStart(2, '0');
+        return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
+    const status = [
+        "Không có lỗi",
+        "Không có lỗi",
+        "Không có lỗi",
+        "Không có lỗi",
+        "Không có lỗi",
+        "Lỗi cảm biến",
+        "Lỗi động cơ",
+        "Không có lỗi",
+        "Không có lỗi",
+        "Không có lỗi"
+    ];
+
+    const tasks = Array.from({ length: 10 }, (_, i) => {
+        const date = new Date();
+
+        date.setHours(Math.floor(Math.random() * 24));
+        date.setMinutes(Math.floor(Math.random() * 60));
+        date.setSeconds(Math.floor(Math.random() * 60));
+
+        return {
+            time: formatDate(date),
+            value: status[i % status.length]
+        };
+    });
+
+    $('#error_history_table').tabulator({
         width: "auto",
         data: tasks,
         layout: "fitDataStretch",
@@ -154,4 +217,49 @@ function drawTable() {
             { title: "Giá trị", field: "value" },
         ],
     })
+}
+function drawTable3() {
+    function formatDate(date) {
+        const pad = n => String(n).padStart(2, '0');
+        return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
+
+    const stableSpeeds = [68, 72, 71, 69, 70, 67, 73, 74, 66, 70];
+
+    const tasks = Array.from({ length: 10 }, (_, i) => {
+        const date = new Date();
+
+        date.setHours(Math.floor(Math.random() * 24));
+        date.setMinutes(Math.floor(Math.random() * 60));
+        date.setSeconds(Math.floor(Math.random() * 60));
+
+        return {
+            time: formatDate(date),
+            value: stableSpeeds[i % stableSpeeds.length]
+        };
+    });
+
+    $('#machine_status_table').tabulator({
+        height: "auto",
+        data: tasks,
+        layout: "fitDataStretch",
+        pagination: true,
+        paginationSize: 10,
+        rowHeight: 52,
+        selectable: true,
+        columns: [
+            {
+                formatter: "rowSelection",
+                titleFormatter: "rowSelection",
+                hozAlign: "center",
+                headerSort: false,
+                cellClick: function (e, cell) {
+                    cell.getRow().toggleSelect();
+                },
+                width: 50
+            },
+            { title: "Thời gian", field: "time", width: 200 },
+            { title: "Tốc độ", field: "value" },
+        ],
+    });
 }

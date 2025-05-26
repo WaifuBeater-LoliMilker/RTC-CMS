@@ -96,7 +96,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Monitoring</div>
+                        @* <div class="sb-sidenav-menu-heading">Monitoring</div> *@
                         <a class="nav-link collapsed" href="#"
                            data-bs-toggle="collapse" data-bs-target="#monitor_menu"
                            aria-expanded="false" aria-controls="monitor_menu">
@@ -105,18 +105,22 @@
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse show" id="monitor_menu"
-                            aria-labelledby="monitorHeading" >
+                             aria-labelledby="monitorHeading">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/conveyor">Giám sát trạng thái</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Giám sát tốc độ</a>
+                                <a class="nav-link" href="/conveyor">
+                                    <i class="fa-solid fa-desktop"></i>&nbsp Giám sát trạng thái
+                                </a>
+                                <a class="nav-link" href="/speed">
+                                    <i class="fa-solid fa-gauge"></i> &nbsp Giám sát tốc độ
+                                </a>
                             </nav>
                         </div>
-                        <div class="sb-sidenav-menu-heading">Scheduled maintenance</div>
+                        @* <div class="sb-sidenav-menu-heading">Scheduled maintenance</div> *@
                         <a class="nav-link" href="/maintenance">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Bảo trì định kỳ
                         </a>
-                        <div class="sb-sidenav-menu-heading">Category</div>
+                        @* <div class="sb-sidenav-menu-heading">Category</div> *@
                         <a class="nav-link collapsed" href="#"
                            data-bs-toggle="collapse" data-bs-target="#category_menu"
                            aria-expanded="false" aria-controls="category_menu">
@@ -125,14 +129,14 @@
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse show" id="category_menu"
-                            aria-labelledby="monitorHeading" >
+                             aria-labelledby="monitorHeading">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/areas">Khu vực</a>
-                                <a class="nav-link" href="/machines">Máy</a>
-                                <a class="nav-link" href="/users">Người dùng</a>
-                                <a class="nav-link" href="/roles">Phân quyền</a>
-                                <a class="nav-link" href="/errors">Lỗi</a>
-                                <a class="nav-link" href="/machines/info">Chi tiết máy</a>
+                                <a class="nav-link" href="/areas"><i class="fa-solid fa-chart-area"></i>&nbsp Khu vực</a>
+                                <a class="nav-link" href="/machines"><i class="fa-solid fa-laptop"></i>&nbsp Máy</a>
+                                <a class="nav-link" href="/users"><i class="fa-solid fa-user"></i>&nbsp Người dùng</a>
+                                <a class="nav-link" href="/roles"><i class="fa-solid fa-hand"></i>&nbsp Phân quyền</a>
+                                <a class="nav-link" href="/errors"><i class="fa-solid fa-circle-exclamation"></i>&nbsp Lỗi</a>
+                                <a class="nav-link" href="/machines/info"><i class="fa-solid fa-circle-info"></i>&nbsp Chi tiết máy</a>
                             </nav>
                         </div>
                     </div>

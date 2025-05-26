@@ -2,325 +2,316 @@
 @using Microsoft.AspNetCore.Http
 
 @{
-	ViewData["Title"] = "Machines";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Machines";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Danh mục</span> <i class='fa-solid fa-angle-right'></i> Thiết bị";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Flatpickr for DateTime Picker -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<style>
-	.tabulator .tabulator-cell,
-	.tabulator .tabulator-header .tabulator-col {
-		border: 1px solid #ccc;
-		box-sizing: border-box;
-	}
+<link href="~/css/machines/machines.css" rel="stylesheet" />
 
-	.tabulator .tabulator-row {
-		border-bottom: none; /* vì cell đã có border riêng */
-	}
-</style>
-
-
-<div class="container-fluid px-4">
-	<h1 class="mt-4 mb-4">Thiết bị</h1>
-	<div class="card mb-4 px-1 px-md-2">
-		<div class="row g-3 px-1 px-md-3 mb-1 mb-md-2 mt-2">
-			<div class="col-12 col-md-5">
-				<div class="d-flex align-items-center gap-2">
-					<label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm:</label>
-					<input type="text" class="form-control" id="search" autofocus />
-				</div>
-			</div>
-			<div class="col-12 col-md-6">
-				<div class="d-flex align-items-center gap-2">
-					<label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái:</label>
-					<select class="form-control flex-grow-1" id="status_search">
-						<option value="0">Tất cả</option>
-						<option value="1">Chưa tiến hành</option>
-						<option value="2">Đang tiến hành</option>
-						<option value="3">Đã hoàn thành</option>
-						<option value="4">Đã hủy bỏ</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-12 col-md-1">
-				<button class="btn btn-primary w-100">
-					<i class="fa-solid fa-search"></i>
-					Tìm kiếm
-				</button>
-			</div>
-		</div>
-		<div class="card-header">
-			<button class="btn btn-primary" id="task_add"
-					data-bs-toggle="modal" data-bs-target="#modal_add_task">
-				<i class="fa-solid fa-plus"></i> Thêm
-			</button>
-			<button class="btn btn-success" id="task_edit">
-				<i class="fa-solid fa-pen-to-square"></i> Sửa
-			</button>
-			<button class="btn btn-secondary" id="task_copy">
-				<i class="fa-solid fa-copy"></i> Copy
-			</button>
-			<button class="btn btn-danger" id="task_delete">
-				<i class="fa-solid fa-trash"></i> Xóa
-			</button>
-		</div>
-		<div class="card-body">
-			<div id="machine_table"></div>
-		</div>
-	</div>
+<div class="container-fluid px-4 mt-3">
+    <div class="card mb-4 px-1 px-md-2">
+        <div class="row g-3 px-1 px-md-3 mb-1 mb-md-2 mt-2">
+            <div class="col-12 col-md-5">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm:</label>
+                    <input type="text" class="form-control" id="search" autofocus />
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái:</label>
+                    <select class="form-control flex-grow-1" id="status_search">
+                        <option value="0">Tất cả</option>
+                        <option value="1">Chưa tiến hành</option>
+                        <option value="2">Đang tiến hành</option>
+                        <option value="3">Đã hoàn thành</option>
+                        <option value="4">Đã hủy bỏ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-1">
+                <button class="btn btn-primary w-100">
+                    <i class="fa-solid fa-search"></i>
+                    Tìm kiếm
+                </button>
+            </div>
+        </div>
+        <div class="card-header">
+            <button class="btn btn-primary" id="task_add"
+                    data-bs-toggle="modal" data-bs-target="#modal_add_task">
+                <i class="fa-solid fa-plus"></i> Thêm
+            </button>
+            <button class="btn btn-success" id="task_edit">
+                <i class="fa-solid fa-pen-to-square"></i> Sửa
+            </button>
+            <button class="btn btn-secondary" id="task_copy">
+                <i class="fa-solid fa-copy"></i> Copy
+            </button>
+            <button class="btn btn-danger" id="task_delete">
+                <i class="fa-solid fa-trash"></i> Xóa
+            </button>
+        </div>
+        <div class="card-body">
+            <div id="machine_table"></div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="modal_machine_items" data-bs-keyboard="false" tabindex="-1"
-	 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Chi tiết thiết bị</h5>
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Chi tiết thiết bị</h3>
 
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
-						<li class="nav-item" role="presentation">
-							<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#machine_item_info"
-									type="button" role="tab" aria-controls="home" aria-selected="true">
-								Thông tin thiết bị
-							</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_temperature"
-									type="button" role="tab" aria-controls="profile" aria-selected="false">
-								Dữ liệu nhiệt độ
-							</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_rung"
-									type="button" role="tab" aria-controls="contact" aria-selected="false">
-								Dữ liệu độ rung
-							</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_dong"
-									type="button" role="tab" aria-controls="profile" aria-selected="false">
-								Dữ liệu dòng điện
-							</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_dien"
-									type="button" role="tab" aria-controls="contact" aria-selected="false">
-								Dữ liệu điện áp
-							</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_tanso"
-									type="button" role="tab" aria-controls="profile" aria-selected="false">
-								Dữ liệu tần số
-							</button>
-						</li>
-						<li class="nav-item" role="presentation">
-							<button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_files"
-									type="button" role="tab" aria-controls="contact" aria-selected="false">
-								File đính kèm
-							</button>
-						</li>
-					</ul>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#machine_item_info"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">
+                                Thông tin thiết bị
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_temperature"
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                Dữ liệu nhiệt độ
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_rung"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                Dữ liệu độ rung
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_dong"
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                Dữ liệu dòng điện
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_dien"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                Dữ liệu điện áp
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_item_history_tanso"
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                Dữ liệu tần số
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#machine_files"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                File đính kèm
+                            </button>
+                        </li>
+                    </ul>
 
-					<!-- Tab panes -->
-					<div class="tab-content pt-3">
-						<div class="tab-pane fade show active" id="machine_item_info" role="tabpanel" aria-labelledby="home-tab">
-							<form>
-								<div class="row mb-3">
-									<div class="col-md-4">
-										<div class="form-floating">
-											<input type="text" class="form-control" id="machine_item_machinename" placeholder="Tên máy" value="Băng tải 2" disabled>
-											<label for="machine_item_machinename">Tên máy</label>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-floating">
-											<input type="text" class="form-control" id="machine_item_machineitemcode" placeholder="Mã thiết bị" value="M001-MI01">
-											<label for="machine_item_machineitemcode">Mã thiết bị <span style="color:red">(*)</span> </label>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-floating">
-											<input type="text" class="form-control" id="machine_item_machineitemname" placeholder="Tên thiết bị" value="Động cơ 1">
-											<label for="machine_item_machineitemname">Tên thiết bị <span style="color:red">(*)</span></label>
-										</div>
-									</div>
-								</div>
+                    <!-- Tab panes -->
+                    <div class="tab-content pt-3">
+                        <div class="tab-pane fade show active" id="machine_item_info" role="tabpanel" aria-labelledby="home-tab">
+                            <form>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="machine_item_machinename" placeholder="Tên máy" value="Băng tải 2" disabled>
+                                            <label for="machine_item_machinename">Tên máy</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="machine_item_machineitemcode" placeholder="Mã thiết bị" value="M001-MI01">
+                                            <label for="machine_item_machineitemcode">Mã thiết bị <span style="color:red">(*)</span> </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="machine_item_machineitemname" placeholder="Tên thiết bị" value="Động cơ 1">
+                                            <label for="machine_item_machineitemname">Tên thiết bị <span style="color:red">(*)</span></label>
+                                        </div>
+                                    </div>
+                                </div>
 
-								<div class="row mb-3">
-									<div class="col-md-4">
-										<div class="form-floating">
-											<select class="form-select" id="machineitem_machineitemtype">
-												<option value="" disabled>Loại thiết bị</option>
-												<option value="1" selected>Động cơ</option>
-												<option value="2">Biến tần</option>
-											</select>
-											<label for="machineitem_machineitemtype">Loại thiết bị <span style="color:red">(*)</span></label>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-floating">
-											<input type="text" class="form-control" id="machineitem_operatorthreshold" placeholder="Ngưỡng vận hành (h)" value="60">
-											<label for="machineitem_operatorthreshold">Ngưỡng vận hành (h) <span style="color:red">(*)</span></label>
-										</div>
-									</div>
-									<div class="col-md-4"></div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="machineitem_machineitemtype">
+                                                <option value="" disabled>Loại thiết bị</option>
+                                                <option value="1" selected>Động cơ</option>
+                                                <option value="2">Biến tần</option>
+                                            </select>
+                                            <label for="machineitem_machineitemtype">Loại thiết bị <span style="color:red">(*)</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="machineitem_operatorthreshold" placeholder="Ngưỡng vận hành (h)" value="60">
+                                            <label for="machineitem_operatorthreshold">Ngưỡng vận hành (h) <span style="color:red">(*)</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4"></div>
 
-								</div>
-								<div>
-									<button id="btnAddVariant" class="btn btn-primary mb-2">Thêm thông số</button>
+                                </div>
+                                <div>
+                                    <button id="btnAddVariant" class="btn btn-primary mb-2">Thêm thông số</button>
 
-									<div class="card">
-										<div class="card-body">
-											<h5 class="card-title">Thông số thu thập</h5>
-											<div id="machineitem_variant">
-											</div>
-										</div>
-									</div>
-									
-								</div>
-							</form>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Thông số thu thập</h5>
+                                            <div id="machineitem_variant">
+                                            </div>
+                                        </div>
+                                    </div>
 
-						</div>
-						<div class="tab-pane fade" id="machine_item_history_temperature" role="tabpanel" aria-labelledby="profile-tab">
-							<div class="mb-3">
-								<label for="datePicker" class="form-label">Chọn ngày:</label>
-								<input type="text" id="datePicker" class="form-control" placeholder="Chọn ngày" />
-							</div>
-							<div class="row">
-								<div class="col-6">
-									<div id="table_data_temp">
-									</div>
-								</div>
+                                </div>
+                            </form>
 
-								<div class="col-6" style="height: 70vh;">
-									<div id="chart_temperature" style="height: 70vh;width:90vh"></div>
-								</div>
+                        </div>
+                        <div class="tab-pane fade" id="machine_item_history_temperature" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="mb-3">
+                                <label for="datePicker" class="form-label">Chọn ngày:</label>
+                                <input type="text" id="datePicker" class="form-control" placeholder="Chọn ngày" />
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div id="table_data_temp">
+                                    </div>
+                                </div>
 
-							</div>
-						</div>
-						<div class="tab-pane fade" id="machine_item_history_rung" role="tabpanel" aria-labelledby="contact-tab">
-							<div class="row">
-								<div class="col-6">
-									<div id="table_data_rung">
-									</div>
-								</div>
+                                <div class="col-6" style="height: 70vh;">
+                                    <div id="chart_temperature" style="height: 70vh;width:90vh"></div>
+                                </div>
 
-								<div class="col-6" style="height: 70vh;">
-									<div id="chart_rung" style="height: 70vh;width:90VH"></div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="machine_item_history_dong" role="tabpanel" aria-labelledby="contact-tab">
-							<div class="row">
-								<div class="col-6">
-									<div id="table_data_dong">
-									</div>
-								</div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="machine_item_history_rung" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div id="table_data_rung">
+                                    </div>
+                                </div>
 
-								<div class="col-6" style="height: 70vh;">
-									<div id="chart_dong" style="height: 70vh;width:90VH"></div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="machine_item_history_dien" role="tabpanel" aria-labelledby="contact-tab">
-							<div class="row">
-								<div class="col-6">
-									<div id="table_data_dien">
-									</div>
-								</div>
+                                <div class="col-6" style="height: 70vh;">
+                                    <div id="chart_rung" style="height: 70vh;width:90VH"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="machine_item_history_dong" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div id="table_data_dong">
+                                    </div>
+                                </div>
 
-								<div class="col-6" style="height: 70vh;">
-									<div id="chart_dien" style="height: 70vh;width:90VH"></div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="machine_item_history_tanso" role="tabpanel" aria-labelledby="contact-tab">
-							<div class="row">
-								<div class="col-6">
-									<div id="table_data_tanso">
-									</div>
-								</div>
+                                <div class="col-6" style="height: 70vh;">
+                                    <div id="chart_dong" style="height: 70vh;width:90VH"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="machine_item_history_dien" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div id="table_data_dien">
+                                    </div>
+                                </div>
 
-								<div class="col-6" style="height: 70vh;">
-									<div id="chart_tanso" style="height: 70vh;width:90VH"></div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-pane fade" id="machine_files" role="tabpanel" aria-labelledby="contact-tab">
-							<div class="mb-3">
-								<button class="btn btn-primary" id="task_add"
-										data-bs-toggle="modal" data-bs-target="#modal_add_task">
-									<i class="fa-solid fa-plus"></i> Thêm
-								</button>
-								<button class="btn btn-success" id="task_edit">
-									<i class="fa-solid fa-pen-to-square"></i> Sửa
-								</button>
-								<button class="btn btn-secondary" id="task_copy">
-									<i class="fa-solid fa-copy"></i> Copy
-								</button>
-								<button class="btn btn-danger" id="task_delete">
-									<i class="fa-solid fa-trash"></i> Xóa
-								</button>
-							</div>
-							<div class="accordion" id="accordionExample">
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-											<img src="~/imgs/excel.png" class="accordion-btn-img" /><span class="mx-1">Thông tin thiết bị.xlsx</span>
-										</button>
-									</h2>
-									<div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-											<img src="~/imgs/word.png" class="accordion-btn-img" /><span class="mx-1">Kế hoạch bảo dưỡng.docx</span>
-										</button>
-									</h2>
-									<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-											<img src="~/imgs/pdf.png" class="accordion-btn-img" /><span class="mx-1">Bản thiết kế.pdf</span>
-										</button>
-									</h2>
-									<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-success">
-					<i class="fa-solid fa-floppy-disk"></i> Lưu
-				</button>
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-					<i class="fa-solid fa-xmark"></i> Đóng
-				</button>
-			</div>
-		</div>
-	</div>
+                                <div class="col-6" style="height: 70vh;">
+                                    <div id="chart_dien" style="height: 70vh;width:90VH"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="machine_item_history_tanso" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div id="table_data_tanso">
+                                    </div>
+                                </div>
+
+                                <div class="col-6" style="height: 70vh;">
+                                    <div id="chart_tanso" style="height: 70vh;width:90VH"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="machine_files" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="mb-3">
+                                <button class="btn btn-primary" id="task_add"
+                                        data-bs-toggle="modal" data-bs-target="#modal_add_task">
+                                    <i class="fa-solid fa-plus"></i> Thêm
+                                </button>
+                                <button class="btn btn-success" id="task_edit">
+                                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                                </button>
+                                <button class="btn btn-secondary" id="task_copy">
+                                    <i class="fa-solid fa-copy"></i> Copy
+                                </button>
+                                <button class="btn btn-danger" id="task_delete">
+                                    <i class="fa-solid fa-trash"></i> Xóa
+                                </button>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <img src="~/imgs/excel.png" class="accordion-btn-img" /><span class="mx-1">Thông tin thiết bị.xlsx</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="d-flex justify-content-center">
+                                                <iframe style="width: 850px;height:450px" src="https://rtceduvnnh-my.sharepoint.com/personal/tech20_rtc_edu_vn/_layouts/15/Doc.aspx?sourcedoc={f364b1e5-d12a-4449-bdb5-05792f485b0e}&amp;action=embedview" frameborder="0">Đây là tài liệu <a target="_blank" href="https://office.com">Microsoft Office</a> được nhúng tài liệu, hoạt động trên nền tảng <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <img src="~/imgs/word.png" class="accordion-btn-img" /><span class="mx-1">Kế hoạch bảo dưỡng.docx</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <img src="~/imgs/pdf.png" class="accordion-btn-img" /><span class="mx-1">Bản thiết kế.pdf</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Lưu
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i> Đóng
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

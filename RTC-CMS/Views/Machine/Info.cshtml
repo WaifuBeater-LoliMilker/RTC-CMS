@@ -5,7 +5,7 @@
 @{
     var user = Context.Session.GetObject<Users>("User");
     ViewData["Title"] = "Machine info";
-    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Thiết bị<span> <i class='fa-solid fa-angle-right'></i> Thông tin";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Danh mục</span> <i class='fa-solid fa-angle-right'></i> Chi tiết máy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/css/machines/info.css" rel="stylesheet" />
@@ -18,9 +18,11 @@
 <div class="modal fade" id="modal_tabs" data-bs-keyboard="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
         <div class="modal-content">
-            @* <div class="modal-header">
-            </div> *@
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header">
+                <h3 class="modal-title">Chi tiết máy</h3>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div class="modal-body">
                 <form>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -75,19 +77,46 @@
                         </div>
                         <div class="tab-pane fade" id="machine_history" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="container-fluid">
+                                <div class="mb-3">
+                                    <button class="btn btn-secondary" id="task_copy">
+                                        <i class="fa-solid fa-copy"></i> Copy
+                                    </button>
+                                    <button class="btn btn-success" id="task_delete">
+                                        <i class="fa-solid fa-file-excel"></i> Xuất
+                                    </button>
+                                </div>
                                 <div class="row">
                                     <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
                                         <div id="machine_history_table" class="table-bordered border-primary"></div>
                                     </div>
 
                                     <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
-                                        <div class="chart c-blue mb-1 mx-auto"></div>
+                                        <div class="card-body p-0">
+                                            <div class="card-body row m-0 px-auto pt-5">
+                                                <div class="col-12 d-flex justify-content-evenly m-1">
+                                                    <button class="btn btn-sm btn-outline-success  fw-bold ">&Sigma; RUN: 18 (H)</button>
+                                                    <button class="btn btn-sm btn-outline-warning  fw-bold ">&Sigma; STOP: 2 (H)</button>
+                                                    <button class="btn btn-sm btn-outline-danger   fw-bold ">&Sigma; ERROR: 2 (H)</button>
+                                                </div>
+
+                                                <div id="time_line_chart_1" class="timeline-chart p-0 h-100 col-12">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="error_history" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="container-fluid">
+                                <div class="mb-3">
+                                    <button class="btn btn-secondary" id="task_copy">
+                                        <i class="fa-solid fa-copy"></i> Copy
+                                    </button>
+                                    <button class="btn btn-success" id="task_delete">
+                                        <i class="fa-solid fa-file-excel"></i> Xuất
+                                    </button>
+                                </div>
                                 <div class="row">
                                     <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
                                         <div id="error_history_table" class="table-bordered border-primary"></div>
@@ -112,24 +141,21 @@
                         </div>
                         <div class="tab-pane fade" id="machine_status" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="container-fluid">
+                                <div class="mb-3">
+                                    <button class="btn btn-secondary" id="task_copy">
+                                        <i class="fa-solid fa-copy"></i> Copy
+                                    </button>
+                                    <button class="btn btn-success" id="task_delete">
+                                        <i class="fa-solid fa-file-excel"></i> Xuất
+                                    </button>
+                                </div>
                                 <div class="row">
                                     <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
                                         <div id="machine_status_table" class="table-bordered border-primary"></div>
                                     </div>
 
                                     <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
-                                        <div class="card-body p-0">
-                                            <div class="card-body row m-0 px-auto pt-5">
-                                                <div class="col-12 d-flex justify-content-evenly m-1">
-                                                    <button class="btn btn-sm btn-outline-success  fw-bold ">&Sigma; RUN: 18 (H)</button>
-                                                    <button class="btn btn-sm btn-outline-warning  fw-bold ">&Sigma; STOP: 2 (H)</button>
-                                                    <button class="btn btn-sm btn-outline-danger   fw-bold ">&Sigma; ERROR: 2 (H)</button>
-                                                </div>
-
-                                                <div id="time_line_chart_3" class="timeline-chart p-0 h-100 col-12">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="chart c-blue mb-1 mx-auto"></div>
                                     </div>
                                 </div>
                             </div>
@@ -160,9 +186,9 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="d-flex justify-content-center">
-                                                @* <iframe style="width: 800px;height:250px" src="https://rtceduvnnh-my.sharepoint.com/personal/tech20_rtc_edu_vn/_layouts/15/Doc.aspx?sourcedoc={9b7183a5-3f59-4c72-ab85-e3e4a3e86f7c}&amp;action=embedview" frameborder="0">
+                                                <iframe style="width: 850px;height:450px" src="https://rtceduvnnh-my.sharepoint.com/personal/tech20_rtc_edu_vn/_layouts/15/Doc.aspx?sourcedoc={9b7183a5-3f59-4c72-ab85-e3e4a3e86f7c}&amp;action=embedview" frameborder="0">
                                                     This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> document, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.
-                                                </iframe> *@
+                                                </iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -196,12 +222,12 @@
                     </div>
                 </form>
             </div>
-            @* <div class="modal-footer">
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fa-solid fa-xmark"></i> Đóng
                 </button>
-            </div> *@
+            </div>
         </div>
     </div>
 </div>
-<script src="~/js/machines/info.js"></script>
+<script src="~/js/machines/info.js" asp-append-version="true"></script>
