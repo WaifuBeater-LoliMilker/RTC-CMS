@@ -1,0 +1,35 @@
+﻿
+svg > g > text {
+    font-size: 12px !important;
+}
+
+#time_line_chart {
+    width: 100%;
+    height: 90px;
+    position: relative;
+}
+
+.line_chart > div .line_chart > div > canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+.dflexcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backgroup_speed {
+    /*background-color: #cde5df;*/
+}
+
+.background_engine {
+    /*background-color: #f7e7ce;*/
+}
+
+.background_voltage {
+/*    background-color: #e3d7f4;*/
+}
+
