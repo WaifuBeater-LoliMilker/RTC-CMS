@@ -2,6 +2,11 @@
     GenChartTimeLine();
     GenChartLine();
     GenChartSpeed();
+    setInterval(function () {
+        GenChartTimeLine();
+        GenChartLine();
+        GenChartSpeed();
+    },2000)
 })
 
 

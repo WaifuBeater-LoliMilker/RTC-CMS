@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Machines";
-    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Danh mục</span> <i class='fa-solid fa-angle-right'></i> Thiết bị";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Danh mục</span> <i class='fa-solid fa-angle-right fa-xs'></i><span> Thiết bị</span>";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Flatpickr for DateTime Picker -->
@@ -16,14 +16,14 @@
         <div class="row g-3 px-1 px-md-3 mb-1 mb-md-2 mt-2">
             <div class="col-12 col-md-5">
                 <div class="d-flex align-items-center gap-2">
-                    <label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm:</label>
+                    <label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm</label>
                     <input type="text" class="form-control" id="search" autofocus />
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="d-flex align-items-center gap-2">
-                    <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái:</label>
-                    <select class="form-control flex-grow-1" id="status_search">
+                    <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái</label>
+                    <select class="form-select flex-grow-1" id="status_search">
                         <option value="0">Tất cả</option>
                         <option value="1">Chưa tiến hành</option>
                         <option value="2">Đang tiến hành</option>

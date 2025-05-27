@@ -10,6 +10,7 @@
         layout: "fitColumns",
         dataTreeStartExpanded: true,
         dataTreeChildField: "children",
+        rowHeight: 53,
         columns: [
             { title: "Area code", field: "AreaCode", width: 200, responsive: 0 },
             { title: "Area name", field: "AreaName", widthGrow: 3 },

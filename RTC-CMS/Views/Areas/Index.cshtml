@@ -3,14 +3,15 @@
 
 @{
     ViewData["Title"] = "Areas";
-    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Danh mục</span> <i class='fa-solid fa-angle-right'></i> Khu vực";
+    ViewData["NavHeader"] = 
+    @"<span class='link-underline-secondary'>Danh mục </span> <i class='fa-solid fa-angle-right fa-xs'></i> <span> Khu vực</span>";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid px-4 mt-5">
+<div class="container-fluid px-4 mt-3">
     <div class="card mb-4">
         <div class="card-header">
-            <div class="mb-3">
+            <div class="my-1">
                 <button class="btn btn-primary" id="task_add"
                         data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <i class="fa-solid fa-plus"></i> Thêm
