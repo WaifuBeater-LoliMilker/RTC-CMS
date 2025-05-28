@@ -18,7 +18,7 @@ function GenChartLine() {
                 top: 15,
                 bottom: 25,
                 left: 30,
-                right: 10
+                right: 20
             },
             title: {
                 text: 'Độ rung',
@@ -64,8 +64,8 @@ function GenChartLine() {
                     fontSize: 9,
                     color: '#212529'
                 },
-                min: 0,
-                max: 2.5,
+                min: 0.5,
+                max: 2,
                 axisLine: {
                     lineStyle: {
                         color: '#6c757d',
@@ -76,8 +76,9 @@ function GenChartLine() {
                     show: false
                 }
             },
-            series: [{
-                data: generateRandomArray(1.1, 1.8),
+            series: [
+                {
+                data: generateRandomArray(1.3, 1.5),
                 type: 'line',
                 lineStyle: {
                     color: '#ffc107' // hồng đậm - nổi bật trên nền vàng
@@ -93,8 +94,24 @@ function GenChartLine() {
                     shadowColor: 'transparent',
                     shadowBlur: 0,
                     fontFamily: 'sans-serif'
+                    },
+                markLine: {
+                    silent: true,
+                    lineStyle: {
+                        color: '#B22222', // Màu đỏ đậm
+                        type: 'dashed'     // Kiểu đường: solid, dashed, dotted
+                    },
+                    label: {
+                        fontSize: 8,
+                    },
+                    symbol: 'none',
+                    data: [
+                        { yAxis: 1.8 },    // Giới hạn trên
+                        { yAxis: 1.1 }      // Giới hạn dưới
+                    ]
                 }
-            }]
+                }
+            ]
         };
         myChart.setOption(option);
     });
@@ -109,7 +126,7 @@ function GenChartLine() {
                 top: 15,
                 bottom: 25,
                 left: 30,
-                right: 10
+                right: 20
             },
             title: {
                 text: 'Nhiệt độ',
@@ -156,8 +173,8 @@ function GenChartLine() {
                     color: '#212529',
                     fontFamily: 'sans-serif'
                 },
-                min: 0,
-                max: 100,
+                min: 30,
+                max: 60,
                 axisLine: {
                     lineStyle: {
                         color: '#6c757d'
@@ -184,6 +201,21 @@ function GenChartLine() {
                     shadowColor: 'transparent',
                     shadowBlur: 0,
                     fontFamily: 'sans-serif'
+                },
+                markLine: {
+                    silent: true,
+                    lineStyle: {
+                        color: '#B22222',
+                        type: 'dashed'   
+                    },
+                    label: {
+                        fontSize: 8,
+                    },
+                    symbol: 'none',
+                    data: [
+                        { yAxis: 45 },    
+                        { yAxis: 55 }     
+                    ]
                 }
             }]
         };
@@ -199,7 +231,7 @@ function GenChartLine() {
                 top: 15,
                 bottom: 25,
                 left: 30,
-                right: 10
+                right: 20
             },
             title: {
                 text: 'Dòng điện',
@@ -247,7 +279,7 @@ function GenChartLine() {
                     fontFamily: 'sans-serif'
                 },
                 min: 0,
-                max: 37,
+                max: 5,
                 axisLine: {
                     lineStyle: {
                         color: '#6c757d'
@@ -274,7 +306,23 @@ function GenChartLine() {
                     shadowColor: 'transparent',
                     shadowBlur: 0,
                     fontFamily: 'sans-serif'
+                },
+                markLine: {
+                    silent: true,
+                    lineStyle: {
+                        color: '#B22222',
+                        type: 'dashed'
+                    },
+                    label: {
+                        fontSize: 8,
+                    },
+                    symbol: 'none',
+                    data: [
+                        { yAxis: 3.7 },
+                        { yAxis: 1 }
+                    ]
                 }
+
             }]
         };
         myChart.setOption(option);
@@ -288,7 +336,7 @@ function GenChartLine() {
                 top: 15,
                 bottom: 25,
                 left: 30,
-                right: 10
+                right: 20
             },
             title: {
                 text: 'Điện áp',
@@ -335,8 +383,8 @@ function GenChartLine() {
                     color: '#212529',
                     fontFamily: 'sans-serif'
                 },
-                min: 0,
-                max: 380,
+                min: 50,
+                max: 400,
                 axisLine: {
                     lineStyle: {
                         color: '#6c757d'
@@ -363,6 +411,21 @@ function GenChartLine() {
                     shadowColor: 'transparent',
                     shadowBlur: 0,
                     fontFamily: 'sans-serif'
+                },
+                markLine: {
+                    silent: true,
+                    lineStyle: {
+                        color: '#B22222',
+                        type: 'dashed'
+                    },
+                    label: {
+                        fontSize: 8,
+                    },
+                    symbol: 'none',
+                    data: [
+                        { yAxis: 380 },
+                        { yAxis: 100 }
+                    ]
                 }
             }]
         };
@@ -377,7 +440,7 @@ function GenChartLine() {
                 top: 30,
                 bottom: 15,
                 left: 30,
-                right: 10
+                right: 20
             },
             title: {
                 text: 'Tần số',
@@ -429,8 +492,8 @@ function GenChartLine() {
                         color: '#6c757d'
                     }
                 },
-                min: 0,
-                max: 60,
+                min: 30,
+                max: 70,
                 splitLine: {
                     show: false
                 }
@@ -452,6 +515,21 @@ function GenChartLine() {
                     shadowColor: 'transparent',
                     shadowBlur: 0,
                     fontFamily: 'sans-serif'
+                },
+                markLine: {
+                    silent: true,
+                    lineStyle: {
+                        color: '#B22222',
+                        type: 'dashed'
+                    },
+                    label: {
+                        fontSize: 8,
+                    },
+                    symbol: 'none',
+                    data: [
+                        { yAxis: 60 },
+                        { yAxis: 40 }
+                    ]
                 }
             }]
         };
@@ -554,7 +632,7 @@ function GenChartSpeed() {
     var dataSpeed = generateRandomArray(0.6, 0.7);
     var option = {
         grid: {
-            top: 15,
+            top: 20,
             bottom: 25,
             left: 30,
             right: 10
@@ -562,7 +640,7 @@ function GenChartSpeed() {
         title: {
             text: 'Tốc độ',
             left: 'center',
-            top: -5,
+            top: 0,
             textStyle: {
                 fontSize: 12,
                 color: '#212529',
@@ -603,7 +681,7 @@ function GenChartSpeed() {
                 fontFamily: 'sans-serif'
             },
             min: 0,
-            max: 1,
+            max: 1.2,
             axisLine: {
                 lineStyle: {
                     color: '#6c757d'
@@ -630,6 +708,21 @@ function GenChartSpeed() {
                 shadowColor: 'transparent',
                 shadowBlur: 0,
                 fontFamily: 'sans-serif'
+            },
+            markLine: {
+                silent: true,
+                lineStyle: {
+                    color: '#B22222',
+                    type: 'dashed'
+                },
+                label: {
+                    fontSize: 8,
+                },
+                symbol: 'none',
+                data: [
+                    { yAxis: 0.5 },
+                    { yAxis: 1 }
+                ]
             }
         }]
     };

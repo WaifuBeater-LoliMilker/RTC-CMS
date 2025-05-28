@@ -20,6 +20,11 @@
     });
     LoadConveyorData();
     GenChartTimeLine();
+
+    setInterval(function () {
+        LoadConveyorData();
+        GenChartTimeLine();
+    }, 2000)
 });
 function GenChartTimeLine() {
     var colorArr = ['#9e9e9e', '#00B74A', '#FFA900', '#F93154', '#9e9e9e'];
@@ -180,44 +185,44 @@ function LoadConveyorData() {
 
                             <div class="col-4 p-0 m-0">
                                 <div class="row p-0 m-0">
-                                    <div class="col-12 card p-0 m-0">
-                                        <h5 class="text-center col-12 fw-bold p-0 m-0"><i class="fa-solid fa-gear text-primary"></i> Động cơ</h5>
+                                    <div class="col-12 card p-1 m-0">
                                         <div class="col-12 p-0 d-flex justify-content-evenly">
                                             <div class="text-center ">
-                                                <i class="fas fa-bolt text-warning"></i>
+                                                <p class="p-0 m-0 fs-6">${generateRandomArray(1.3, 1.5)[0]}  <i class="fas fa-bolt"></i> - ${ generateRandomArray(48, 53)[0] }  <i class="fa-solid fa-temperature-low"></i> </p>
                                                 <p class="fw-bold p-0 m-0 fs-6">Động cơ ${i*3 + 1}</p>
                                             </div>
 
 
                                             <div class="text-center ">
-                                                <i class="fas fa-bolt text-warning"></i>
+                                                <p class="p-0 m-0 fs-6">${generateRandomArray(1.3, 1.5)[0]}  <i class="fas fa-bolt"></i> - ${ generateRandomArray(48, 53)[0] }  <i class="fa-solid fa-temperature-low"></i> </p>
                                                 <p class="fw-bold p-0 m-0 fs-6">Động cơ ${i * 3 + 2}</p>
                                             </div>
 
                                             <div class="text-center ">
-                                                <i class="fas fa-bolt text-warning"></i>
+                                                <p class="p-0 m-0 fs-6">${generateRandomArray(1.3, 1.5)[0]}  <i class="fas fa-bolt"></i> - ${ generateRandomArray(48, 53)[0] }  <i class="fa-solid fa-temperature-low"></i> </p>
                                                 <p class="fw-bold p-0 m-0 fs-6">Động cơ ${i * 3 + 3}</p>
                                             </div>
 
 
                                         </div>
                                     </div>
-                                    <div class="col-12 card p-0 m-0">
-                                        <h5 class="text-center col-12 fw-bold p-0 m-0"><i class="fa-solid fa-sliders text-primary"></i> Biến tần</h5>
+
+                                    <div class="col-12 card p-1 m-0">
                                         <div class="col-12 p-0 d-flex justify-content-evenly">
                                             <div class="text-center ">
-                                                <i class="fas fa-signal" style="color:#007bff;"></i>
+                                               
+                                                <p class="p-0 m-0 fs-6">${generateRandomArray(1.8, 2.3)[0]} A - ${generateRandomArray(218, 225)[0]} V - ${generateRandomArray(53, 58)[0] } Hz </p>
                                                 <p class="fw-bold p-0 m-0 fs-6">Biến tần ${i * 3 + 1}</p>
                                             </div>
 
 
                                             <div class="text-center ">
-                                                <i class="fas fa-signal" style="color:#007bff;"></i>
+                                                <p class="p-0 m-0 fs-6">${generateRandomArray(1.8, 2.3)[0]} A - ${generateRandomArray(218, 225)[0]} V - ${generateRandomArray(53, 58)[0] } Hz </p>
                                                 <p class="fw-bold p-0 m-0 fs-6">Biến tần ${i * 3 + 2}</p>
                                             </div>
 
                                             <div class="text-center ">
-                                                <i class="fas fa-signal" style="color:#007bff;"></i>
+                                                <p class="p-0 m-0 fs-6">${generateRandomArray(1.8, 2.3)[0]} A - ${generateRandomArray(218, 225)[0]} V - ${generateRandomArray(53, 58)[0] } Hz </p>
                                                 <p class="fw-bold p-0 m-0 fs-6">Biến tần ${i * 3 + 3}</p>
                                             </div>
 
@@ -232,4 +237,15 @@ function LoadConveyorData() {
     }
 
     $("#list_conveyor_place").html(html);
+}
+
+function generateRandomArray(min, max) {
+    const result = [];
+
+    for (let i = 0; i < 10; i++) {
+        const num = Math.random() * (max - min) + min;
+        result.push(parseFloat(num.toFixed(2)));
+    }
+
+    return result;
 }
