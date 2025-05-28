@@ -22,11 +22,13 @@ $(async function () {
 
     //define table
     table = new Tabulator("#machine_table", {
-        height: "70vh",
+        height: "65vh",
         layout: "fitColumns",
         columnDefaults: {
             resizable: true,
         },
+        pagination: true,
+        paginationSize: 10,
         data: result,
         //selectableRows: 1,
         columns: [

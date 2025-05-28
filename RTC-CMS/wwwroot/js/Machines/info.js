@@ -36,7 +36,7 @@
                 type: 'value',
                 axisLabel: {
                     textStyle: {
-                        fontSize: 8
+                        fontSize: 14
                     }
                 }
             },
@@ -142,8 +142,8 @@ function drawTable1() {
         data: tasks,
         layout: "fitDataStretch",
         pagination: true,
-        paginationSize: 10,
-        rowHeight: 52,
+        paginationSize: 8,
+        rowHeight: 48,
         rowHeader: {
             headerSort: false,
             resizable: false,
@@ -198,8 +198,8 @@ function drawTable2() {
         data: tasks,
         layout: "fitDataStretch",
         pagination: true,
-        paginationSize: 10,
-        rowHeight: 52,
+        paginationSize: 8,
+        rowHeight: 48,
         rowHeader: {
             headerSort: false,
             resizable: false,

@@ -59,70 +59,105 @@
                     </ul>
 
                     <!-- Tab panes -->
-                    <div class="tab-content pt-3">
+                    <div class="tab-content pt-0">
                         <div class="tab-pane fade show active" id="machine_info" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="container mt-4">
-                                <div class="card shadow-lg rounded-4 p-4 mb-3">
+                            <div class="container-fluid mt-4">
+                                <div class="card shadow-lg rounded-4 p-3 mb-3">
                                     <h5 class="card-title mb-3">Thông tin thiết bị</h5>
                                     <ul class="list-unstyled row">
-                                        <li class="col-md-6 mb-2"><strong>Tên máy:</strong> Băng tải cấp liệu B204</li>
-                                        <li class="col-md-6 mb-2"><strong>Mã máy:</strong> B204</li>
-                                        <li class="col-md-6 mb-2"><strong>Khu vực:</strong> A-1</li>
-                                        <li class="col-md-6 mb-2"><strong>IP:</strong> 172.135.1.12</li>
-                                        <li class="col-md-6 mb-2"><strong>PORT:</strong> 3306</li>
+                                        <li class="col-md-4 mb-2">
+                                            <strong>Tên máy:</strong>
+                                            <input type="text" class="form-control" value="Băng tải cấp liệu B204" />
+                                        </li>
+                                        <li class="col-md-4 mb-2">
+                                            <strong>Mã máy:</strong>
+                                            <input type="text" class="form-control" value="B204" />
+                                        </li>
+                                        <li class="col-md-4 mb-2">
+                                            <strong>Khu vực:</strong>
+                                            <input type="text" class="form-control" value="A-1" />
+                                        </li>
+                                        <li class="col-md-4 mb-2">
+                                            <strong>IP:</strong>
+                                            <input type="text" class="form-control" value="172.135.1.12" />
+                                        </li>
+                                        <li class="col-md-4 mb-2">
+                                            <strong>PORT:</strong>
+                                            <input type="text" class="form-control" value="3306" />
+                                        </li>
                                     </ul>
                                     <section>
-                                        <div class="container">
+                                        <div class="container-fluid">
                                             <div class="accordion">
-                                                <div class="accordion-item" id="question1">
-                                                    <a class="accordion-link" href="#question1">
+                                                <div class="accordion-item" id="item1">
+                                                    <a class="accordion-link" href="#item1">
                                                         <div class="flex">
-                                                            <h3>BRANDING</h3>
+                                                            <h3>Động cơ 1</h3>
                                                         </div>
-                                                        <i class="icon ion-md-arrow-forward"></i>
-                                                        <i class="icon ion-md-arrow-down"></i>
+                                                        <i class="fa-solid fa-minus"></i>
+                                                        <i class="fa-solid fa-plus"></i>
                                                     </a>
                                                     <div class="answer">
-                                                        <p> We believe in the greater good, we strive to do something for people, we aim to make their lives easier and more enjoyable, we love businesses that keep this</p>
+                                                        <div class="row">
+                                                            <div class="col-6 px-5"><strong>Mã thiết bị:</strong> CV-P001</div>
+                                                            <div class="col-6 px-5"><strong>Trạng thái:</strong> Hoạt động bình thường</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì gần nhất:</strong> 05/05/2025</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì tiếp theo:</strong> 20/06/2025</div>
+                                                        </div>
                                                     </div>
                                                     <hr>
                                                 </div>
-                                                <div class="accordion-item" id="question2">
-                                                    <a class="accordion-link" href="#question2">
+                                                <div class="accordion-item" id="item2">
+                                                    <a class="accordion-link" href="#item2">
                                                         <div class="flex">
-                                                            <h3>UX/UI DESIGN</h3>
+                                                            <h3>Động cơ 2</h3>
                                                         </div>
-                                                        <i class="icon ion-md-arrow-forward"></i>
-                                                        <i class="icon ion-md-arrow-down"></i>
+                                                        <i class="fa-solid fa-minus"></i>
+                                                        <i class="fa-solid fa-plus"></i>
                                                     </a>
                                                     <div class="answer">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                                        <div class="row">
+                                                            <div class="col-6 px-5"><strong>Mã thiết bị:</strong> CV-P002</div>
+                                                            <div class="col-6 px-5"><strong>Trạng thái:</strong> Hoạt động bình thường</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì gần nhất:</strong> 05/05/2025</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì tiếp theo:</strong> 20/06/2025</div>
+                                                        </div>
                                                     </div>
                                                     <hr>
                                                 </div>
-                                                <div class="accordion-item" id="question3">
-                                                    <a class="accordion-link" href="#question3">
+                                                <div class="accordion-item" id="item3">
+                                                    <a class="accordion-link" href="#item3">
                                                         <div class="flex">
-                                                            <h3>FRONTEND DEVELOPMENT</h3>
+                                                            <h3>Động cơ 3</h3>
                                                         </div>
-                                                        <i class="icon ion-md-arrow-forward"></i>
-                                                        <i class="icon ion-md-arrow-down"></i>
+                                                        <i class="fa-solid fa-minus"></i>
+                                                        <i class="fa-solid fa-plus"></i>
                                                     </a>
                                                     <div class="answer">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                                        <div class="row">
+                                                            <div class="col-6 px-5"><strong>Mã thiết bị:</strong> CV-P002</div>
+                                                            <div class="col-6 px-5"><strong>Trạng thái:</strong> Hoạt động bình thường</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì gần nhất:</strong> 05/05/2025</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì tiếp theo:</strong> 20/06/2025</div>
+                                                        </div>
                                                     </div>
                                                     <hr>
                                                 </div>
-                                                <div class="accordion-item" id="question4">
-                                                    <a class="accordion-link" href="#question4">
-                                                        <div>
-                                                            <h3>BACKEND DEVELOPMENT</h3>
+                                                <div class="accordion-item" id="item4">
+                                                    <a class="accordion-link" href="#item4">
+                                                        <div class="flex">
+                                                            <h3>Động cơ 4</h3>
                                                         </div>
-                                                        <i class="icon ion-md-arrow-forward"></i>
-                                                        <i class="icon ion-md-arrow-down"></i>
+                                                        <i class="fa-solid fa-minus"></i>
+                                                        <i class="fa-solid fa-plus"></i>
                                                     </a>
                                                     <div class="answer">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.</p>
+                                                        <div class="row">
+                                                            <div class="col-6 px-5"><strong>Mã thiết bị:</strong> CV-P002</div>
+                                                            <div class="col-6 px-5"><strong>Trạng thái:</strong> Hoạt động bình thường</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì gần nhất:</strong> 05/05/2025</div>
+                                                            <div class="col-6 px-5"><strong>Ngày bảo trì tiếp theo:</strong> 20/06/2025</div>
+                                                        </div>
                                                     </div>
                                                     <hr>
                                                 </div>
@@ -135,7 +170,7 @@
                         </div>
                         <div class="tab-pane fade" id="machine_history" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="container-fluid">
-                                <div class="mb-3">
+                                <div class="mt-3">
                                     <button class="btn btn-secondary" id="task_copy">
                                         <i class="fa-solid fa-copy"></i> Copy
                                     </button>
@@ -144,30 +179,26 @@
                                     </button>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
-                                        <div id="machine_history_table" class="table-bordered border-primary"></div>
-                                    </div>
-
-                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                    <div class="col-12 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
                                         <div class="card-body p-0">
-                                            <div class="card-body row m-0 px-auto pt-5">
-                                                <div class="col-12 d-flex justify-content-evenly m-1">
+                                            <div class="card-body d-flex flex-column m-0">
+                                                <div class="d-flex justify-content-evenly m-1 mx-auto w-25">
                                                     <button class="btn btn-sm btn-outline-success  fw-bold ">&Sigma; RUN: 18 (H)</button>
                                                     <button class="btn btn-sm btn-outline-warning  fw-bold ">&Sigma; STOP: 2 (H)</button>
                                                     <button class="btn btn-sm btn-outline-danger   fw-bold ">&Sigma; ERROR: 2 (H)</button>
                                                 </div>
-
-                                                <div id="time_line_chart_1" class="timeline-chart p-0 h-100 col-12">
+                                                <div id="time_line_chart_1" class="timeline-chart p-0 mx-auto">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="machine_history_table" class="table-bordered border-primary"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="error_history" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="container-fluid">
-                                <div class="mb-3">
+                                <div class="mt-3">
                                     <button class="btn btn-secondary" id="task_copy">
                                         <i class="fa-solid fa-copy"></i> Copy
                                     </button>
@@ -176,30 +207,27 @@
                                     </button>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
-                                        <div id="error_history_table" class="table-bordered border-primary"></div>
-                                    </div>
-
-                                    <div class="col-6 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
+                                    <div class="col-12 d-flex flex-column justify-content-evenly" style="min-height: 500px;">
                                         <div class="card-body p-0">
-                                            <div class="card-body row m-0 px-auto pt-5">
-                                                <div class="col-12 d-flex justify-content-evenly m-1">
+                                            <div class="card-body d-flex flex-column m-0">
+                                                <div class="d-flex justify-content-evenly m-1 mx-auto w-25">
                                                     <button class="btn btn-sm btn-outline-success  fw-bold ">&Sigma; RUN: 18 (H)</button>
                                                     <button class="btn btn-sm btn-outline-warning  fw-bold ">&Sigma; STOP: 2 (H)</button>
                                                     <button class="btn btn-sm btn-outline-danger   fw-bold ">&Sigma; ERROR: 2 (H)</button>
                                                 </div>
 
-                                                <div id="time_line_chart_2" class="timeline-chart p-0 h-100 col-12">
+                                                <div id="time_line_chart_2" class="timeline-chart p-0 col-12">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div id="error_history_table" class="table-bordered border-primary"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="machine_status" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="container-fluid">
-                                <div class="mb-3">
+                                <div class="mt-3">
                                     <button class="btn btn-secondary" id="task_copy">
                                         <i class="fa-solid fa-copy"></i> Copy
                                     </button>
@@ -281,6 +309,9 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Lưu
+                </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="fa-solid fa-xmark"></i> Đóng
                 </button>
