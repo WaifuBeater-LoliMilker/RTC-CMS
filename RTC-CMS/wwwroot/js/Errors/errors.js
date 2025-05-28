@@ -22,7 +22,8 @@ function drawTable() {
         data: errors,
         layout: "fitColumns",
         pagination: true,
-        paginationSize: 7,
+        paginationSize: 10,
+        rowHeight: 53.85,
         columns: [
             { title: "Mã lỗi", field: "code", formatter: 'html', width: '20%' },
             { title: "Tên lỗi", field: "name", formatter: 'html', minWidth: '70%' },
@@ -69,5 +70,15 @@ var errors = [
     { id: 7, code: '<div class="code-cell">E007</div>', name: '<div class="name-cell">Lỗi đọc dữ liệu cảm biến</div>' },
     { id: 8, code: '<div class="code-cell">E008</div>', name: '<div class="name-cell">Lỗi ghi dữ liệu vào cơ sở dữ liệu</div>' },
     { id: 9, code: '<div class="code-cell">E009</div>', name: '<div class="name-cell">Tệp cấu hình bị thiếu hoặc hỏng</div>' },
-    { id: 10, code: '<div class="code-cell">E010</div>', name: '<div class="name-cell">Lỗi xác thực người dùng</div>' }
+    { id: 10, code: '<div class="code-cell">E010</div>', name: '<div class="name-cell">Lỗi xác thực người dùng</div>' },
+    { id: 11, code: '<div class="code-cell">E011</div>', name: '<div class="name-cell">Lỗi kết nối Internet</div>' },
+    { id: 12, code: '<div class="code-cell">E012</div>', name: '<div class="name-cell">Thiết bị ngoại vi bị ngắt kết nối</div>' },
+    { id: 13, code: '<div class="code-cell">E013</div>', name: '<div class="name-cell">Dung lượng bộ nhớ không đủ</div>' },
+    { id: 14, code: '<div class="code-cell">E014</div>', name: '<div class="name-cell">Lỗi phân tích cú pháp JSON</div>' },
+    { id: 15, code: '<div class="code-cell">E015</div>', name: '<div class="name-cell">Phần mềm không tương thích</div>' },
+    { id: 16, code: '<div class="code-cell">E016</div>', name: '<div class="name-cell">Lỗi truyền thông với PLC</div>' },
+    { id: 17, code: '<div class="code-cell">E017</div>', name: '<div class="name-cell">Tài khoản đã bị khóa</div>' },
+    { id: 18, code: '<div class="code-cell">E018</div>', name: '<div class="name-cell">Cảnh báo nhiệt độ quá cao</div>' },
+    { id: 19, code: '<div class="code-cell">E019</div>', name: '<div class="name-cell">Địa chỉ IP không hợp lệ</div>' },
+    { id: 20, code: '<div class="code-cell">E020</div>', name: '<div class="name-cell">Lỗi khởi tạo hệ thống</div>' }
 ];

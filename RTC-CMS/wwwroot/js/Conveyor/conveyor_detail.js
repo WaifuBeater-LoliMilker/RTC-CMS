@@ -319,7 +319,7 @@ function GenChartLine() {
                     symbol: 'none',
                     data: [
                         { yAxis: 3.7 },
-                        { yAxis: 1 }
+                        { yAxis: 0 }
                     ]
                 }
 
@@ -424,7 +424,7 @@ function GenChartLine() {
                     symbol: 'none',
                     data: [
                         { yAxis: 380 },
-                        { yAxis: 100 }
+                        { yAxis: 0 }
                     ]
                 }
             }]
@@ -528,7 +528,7 @@ function GenChartLine() {
                     symbol: 'none',
                     data: [
                         { yAxis: 60 },
-                        { yAxis: 40 }
+                        { yAxis: 0 }
                     ]
                 }
             }]

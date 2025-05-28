@@ -7,6 +7,9 @@ $(async function () {
     table = new Tabulator("#users_table", {
         data: users,
         layout: "fitColumns",
+        rowHeight: 55,
+        pagination: true,
+        paginationSize: 10,
         columns: [
             { title: "ID", field: "Id", visible: false },
             { title: "UserName", field: "UserName" },

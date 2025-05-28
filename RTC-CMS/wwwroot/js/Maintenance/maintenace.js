@@ -12,7 +12,7 @@ function drawTable() {
         layout: "fitDataStretch",
         pagination: true,
         paginationSize: 10,
-        rowHeight: 54.2,
+        rowHeight: 50,
         rowHeader: {
             headerSort: false,
             resizable: false,
