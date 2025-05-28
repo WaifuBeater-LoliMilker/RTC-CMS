@@ -10,22 +10,23 @@
         layout: "fitColumns",
         dataTreeStartExpanded: true,
         dataTreeChildField: "children",
+        rowHeight: 53,
         columns: [
             { title: "Area code", field: "AreaCode", width: 200, responsive: 0 },
             { title: "Area name", field: "AreaName", widthGrow: 3 },
-            {
-                title: "Actions",
-                formatter: function (cell, formatterParams, onRendered) {
-                    const id = cell.getRow().getData().Id;
-                    return `
-                    <button class="btn btn-success btn-edit" data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
-                `;
-                },
-                width: 150,
-                hozAlign: "center",
-                cellClick: CellClick
-            }
+            //{
+            //    title: "Actions",
+            //    formatter: function (cell, formatterParams, onRendered) {
+            //        const id = cell.getRow().getData().Id;
+            //        return `
+            //        <button class="btn btn-success btn-edit" data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
+            //        <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
+            //    `;
+            //    },
+            //    width: 150,
+            //    hozAlign: "center",
+            //    cellClick: CellClick
+            //}
         ],
     });
 

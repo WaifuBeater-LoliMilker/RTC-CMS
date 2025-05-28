@@ -13,19 +13,19 @@ $(async function () {
             { title: "Mật khẩu", field: "Password" },
             { title: "Họ và tên", field: "FullName" },
             { title: "Vai trò", field: "RoleId" },
-            {
-                title: "Actions",
-                formatter: function (cell, formatterParams, onRendered) {
-                    const id = cell.getRow().getData().Id;
-                    return `
-                <button class="btn btn-success btn-edit"  data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
-                <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
-                `;
-                },
-                width: 150,
-                hozAlign: "left",
-                cellClick: CellClick
-            }
+            //{
+            //    title: "Actions",
+            //    formatter: function (cell, formatterParams, onRendered) {
+            //        const id = cell.getRow().getData().Id;
+            //        return `
+            //    <button class="btn btn-success btn-edit"  data-id="${id}"><i class="fa-solid fa-pen-to-square"></i></button>
+            //    <button class="btn btn-danger btn-delete" data-id="${id}"><i class="fa-solid fa-trash"></i></button>
+            //    `;
+            //    },
+            //    width: 150,
+            //    hozAlign: "left",
+            //    cellClick: CellClick
+            //}
         ]
     });
 

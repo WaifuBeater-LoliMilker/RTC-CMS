@@ -5,7 +5,7 @@
 @{
     var user = Context.Session.GetObject<Users>("User");
     ViewData["Title"] = "Maintenance";
-    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Bảo dưỡng<span> <i class='fa-solid fa-angle-right'></i> Lịch sử";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Bảo trì</span>";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/libs/moment/moment.min.js"></script>
@@ -13,26 +13,26 @@
 <link href="~/libs/daterangepicker/daterangepicker.min.css" rel="stylesheet" />
 <link href="~/css/maintenance/maintenance.css" rel="stylesheet" />
 
-<div class="px-1 px-md-2 py-3">
+<div class="px-1 px-md-2 pt-3">
     <div class="container-fluid px-1 px-md-2">
         <div class="row g-3 px-1 px-md-3 mb-1 mb-md-2">
             <div class="col-12 col-md-5">
                 <div class="d-flex align-items-center gap-2">
-                    <label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm:</label>
+                    <label class="flex-shrink-0 fw-bolder" for="search">Tìm kiếm</label>
                     <input type="text" class="form-control" id="search" autofocus />
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="d-flex align-items-center gap-2">
-                    <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái:</label>
-                    <select class="form-control flex-grow-1" id="status_search">
+                    <label class="flex-shrink-0 fw-bolder" for="status_search">Trạng thái</label>
+                    <select class="form-select flex-grow-1" id="status_search">
                         <option value="0">Tất cả</option>
                         <option value="1">Chưa tiến hành</option>
                         <option value="2">Đang tiến hành</option>
                         <option value="3">Đã hoàn thành</option>
                         <option value="4">Đã hủy bỏ</option>
                     </select>
-                    <label class="flex-shrink-0 fw-bolder" for="duration_search">Thời gian:</label>
+                    <label class="flex-shrink-0 fw-bolder" for="duration_search">Thời gian</label>
                     <input type="text" class="form-control flex-grow-1" id="duration_search">
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 </button>
             </div>
         </div>
-        <div class="card mb-4">
+        <div class="card mb-4 mt-2">
             <div class="card-header">
                 <button class="btn btn-primary" id="task_add"
                         data-bs-toggle="modal" data-bs-target="#modal_add_task">

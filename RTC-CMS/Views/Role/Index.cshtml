@@ -3,17 +3,31 @@
 
 @{
     ViewData["Title"] = "Roles";
+    ViewData["NavHeader"] = "<span class='link-underline-secondary'>Danh mục</span> <i class='fa-solid fa-angle-right fa-xs'></i><span> Phân quyền</span>";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container px-4">
-    <h1 class="mt-4 mb-4">Quản lý vai trò</h1>
+<div class="container-fluid px-4 mt-3">
     <div class="card mb-4">
         <div class="card-header">
-            <button class="btn btn-primary" id="role_add" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus"></i></button>
+            <div class="mb-3">
+                <button class="btn btn-primary" id="task_add"
+                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <i class="fa-solid fa-plus"></i> Thêm
+                </button>
+                <button class="btn btn-success" id="task_edit">
+                    <i class="fa-solid fa-pen-to-square"></i> Sửa
+                </button>
+                <button class="btn btn-secondary" id="task_copy">
+                    <i class="fa-solid fa-copy"></i> Copy
+                </button>
+                <button class="btn btn-danger" id="task_delete">
+                    <i class="fa-solid fa-trash"></i> Xóa
+                </button>
+            </div>
         </div>
         <div class="card-body">
-            <div id="role_table"></div>
+            <div id="role_table" class="table-bordered border-primary"></div>
         </div>
     </div>
 </div>
