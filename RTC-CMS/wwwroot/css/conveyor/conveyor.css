@@ -1,8 +1,7 @@
 ﻿a {
     text-decoration: none;
 }
-
-.detail-split {
-    border-left: 1px solid;
-    margin-left: 6px;
+.time_line_chart{
+    height: 65px !important;
+    overflow: hidden;
 }

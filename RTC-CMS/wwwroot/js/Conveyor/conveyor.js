@@ -83,6 +83,9 @@ function GenChartTimeLine() {
                     showBarLabels: false,
                     showRowLabels: false,
                 },
+                chartArea: {
+                    height: '100%'
+                },
                 height: 100,
                 backgroundColor: '#cbcbcf',
                 hAxis: {
@@ -91,7 +94,7 @@ function GenChartTimeLine() {
                     minValue: new Date('2025-05-22T00:00:00'),
                     maxValue: new Date('2025-05-22T23:59:59'),
                     textStyle: {
-                        fontSize: 10
+                        fontSize: 9
                     }
                 },
                 avoidOverlappingGridLines: false
@@ -141,9 +144,7 @@ function GetAllArea() {
             type: "GET",
             dataType: "json", // nếu server trả về JSON
             success: function (response) {
-                // Xử lý dữ liệu khi gọi API thành công
                 resolve(response);
-                // Ví dụ: hiển thị dữ liệu ra HTML
             },
             error: function (xhr, status, error) {
                 // Xử lý khi có lỗi
@@ -166,14 +167,14 @@ function LoadConveyorData() {
                         <div class="row m-0 p-0">
                             <div class="col-8 p-0 m-0 card">
                                 <div class="m-0 p-0 h-100 row">
-                                    <div class="col-12 p-1">
+                                    <div class="col-12 p-2">
                                         <div class="row m-0 p-0">
-                                            <div class="col-6 text-start m-0 p-0">
+                                            <h5 class="fw-bold col-6 text-end m-0 p-0">Băng tải ${i + 1}</h5>
+                                            <div class="col-6 text-end m-0 p-0">
                                                 <button class="btn btn-sm btn-outline-success  fw-bold ">&Sigma; RUN: 18 (H)</button>
                                                 <button class="btn btn-sm btn-outline-warning  fw-bold ">&Sigma; STOP: 2 (H)</button>
                                                 <button class="btn btn-sm btn-outline-danger   fw-bold ">&Sigma; ERROR: 2 (H)</button>
                                             </div>
-                                            <h5 class="fw-bold col-6 text-start m-0 p-0">Băng tải ${i+1}</h5>
                                         </div>
                                     </div>
 
@@ -207,7 +208,7 @@ function LoadConveyorData() {
                                         </div>
                                     </div>
 
-                                    <div class="col-12 card p-0 pb-2 m-0">
+                                    <div class="col-12 card p-0  m-0">
                                         <div class="row m-0 p-0">
                                             <div class="text-center col-4 border-end border-dark p-0">
                                                
