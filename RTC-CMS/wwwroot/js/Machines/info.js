@@ -143,7 +143,7 @@ function drawTable1() {
         layout: "fitDataStretch",
         pagination: true,
         paginationSize: 8,
-        rowHeight: 48,
+        rowHeight: 52.5,
         rowHeader: {
             headerSort: false,
             resizable: false,
@@ -199,7 +199,7 @@ function drawTable2() {
         layout: "fitDataStretch",
         pagination: true,
         paginationSize: 8,
-        rowHeight: 48,
+        rowHeight: 52.5,
         rowHeader: {
             headerSort: false,
             resizable: false,

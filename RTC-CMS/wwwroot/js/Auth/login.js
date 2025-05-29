@@ -17,7 +17,7 @@
                 }
             })
             if (response.ok) {
-                window.location.href = '/home';
+                window.location.href = '/conveyor';
             } else {
                 const message = await response.text();
                 errorText.textContent = message || 'Đã có lỗi xảy ra, vui lòng thử lại'
